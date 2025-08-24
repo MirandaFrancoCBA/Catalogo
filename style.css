@@ -207,3 +207,74 @@ body {
   .card {
     animation: aparecer 0.3s ease;
   }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+  }
+  
+  .modal img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  body.dark .modal-content {
+    background: #1f1f1f;
+    color: #eee;
+  }
+
+  .modal-img-container {
+    position: relative;
+  }
+  
+  .modal-img-container img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.8);
+    border: none;
+    font-size: 1.5rem;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  #prev-img { left: 10px; }
+  #next-img { right: 10px; }
+  
+  body.dark .modal-nav {
+    background: rgba(50,50,50,0.8);
+    color: #eee;
+  }

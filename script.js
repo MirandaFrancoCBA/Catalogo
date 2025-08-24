@@ -39,6 +39,44 @@ function renderProductos(lista) {
     });
   }
 
+// Modal
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modal-img");
+const modalNombre = document.getElementById("modal-nombre");
+const modalDescripcion = document.getElementById("modal-descripcion");
+const modalPrecio = document.getElementById("modal-precio");
+const modalClose = document.querySelector(".modal-close");
+
+// Función para abrir modal con producto
+function abrirModal(prod) {
+  modal.style.display = "flex";
+  modalImg.src = `img/${prod.imagen}`;
+  modalImg.alt = prod.nombre;
+  modalNombre.textContent = prod.nombre;
+  modalDescripcion.textContent = prod.descripcion || "";
+  modalPrecio.textContent = formatoPrecio(prod.precio);
+}
+
+// Cerrar modal al hacer click en X o fuera del contenido
+modalClose.addEventListener("click", () => modal.style.display = "none");
+modal.addEventListener("click", e => {
+  if (e.target === modal) modal.style.display = "none";
+});
+
+// Agregar listener a cada tarjeta
+function agregarListenersTarjetas() {
+  document.querySelectorAll(".card").forEach((card, index) => {
+    card.addEventListener("click", () => abrirModal(productosOriginales[index]));
+  });
+}
+
+// Llamar después de renderizar
+const originalRenderProductos = renderProductos;
+renderProductos = function(lista) {
+  originalRenderProductos(lista);
+  agregarListenersTarjetas();
+};
+
 function aplicarFiltros() {
   const query = document.getElementById("buscador")?.value.trim().toLowerCase() || "";
   const cat = document.getElementById("filtro-categoria")?.value || "";
@@ -125,3 +163,34 @@ function initTema() {
 
 // ejecutar junto a cargarProductos()
 cargarProductos().then(initTema);
+
+let imagenActual = 0;
+let imagenesProducto = [];
+
+function abrirModal(prod) {
+  modal.style.display = "flex";
+  imagenesProducto = prod.imagenes || [];
+  imagenActual = 0;
+  actualizarImagen();
+  modalNombre.textContent = prod.nombre;
+  modalDescripcion.textContent = prod.descripcion || "";
+  modalPrecio.textContent = formatoPrecio(prod.precio);
+}
+
+function actualizarImagen() {
+  modalImg.src = `img/${imagenesProducto[imagenActual]}`;
+}
+
+document.getElementById("prev-img").addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (imagenesProducto.length === 0) return;
+  imagenActual = (imagenActual - 1 + imagenesProducto.length) % imagenesProducto.length;
+  actualizarImagen();
+});
+
+document.getElementById("next-img").addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (imagenesProducto.length === 0) return;
+  imagenActual = (imagenActual + 1) % imagenesProducto.length;
+  actualizarImagen();
+});
