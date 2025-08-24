@@ -1,6 +1,5 @@
 let productosOriginales = [];
 
-// Formatear precio
 function formatoPrecio(valor) {
   try {
     return new Intl.NumberFormat("es-AR", {
@@ -13,38 +12,71 @@ function formatoPrecio(valor) {
   }
 }
 
-// Renderizar productos
 function renderProductos(lista) {
-  const contenedor = document.getElementById("catalogo");
-  contenedor.innerHTML = "";
-
-  if (!lista.length) {
-    const vacio = document.createElement("div");
-    vacio.className = "empty";
-    vacio.textContent = "No hay productos que coincidan con la búsqueda.";
-    contenedor.appendChild(vacio);
-    return;
+    const contenedor = document.getElementById("catalogo");
+    contenedor.innerHTML = "";
+  
+    if (!lista.length) {
+      const vacio = document.createElement("div");
+      vacio.className = "empty";
+      vacio.textContent = "No hay productos que coincidan con la búsqueda.";
+      contenedor.appendChild(vacio);
+      return;
+    }
+  
+    lista.forEach((prod) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="img/${prod.imagen}" alt="${prod.nombre}" class="card-img">
+        <div class="card-body">
+          <h3 class="card-title">${prod.nombre}</h3>
+          <p class="card-desc">${prod.descripcion || ""}</p>
+          <p class="card-price"><strong>${formatoPrecio(prod.precio)}</strong></p>
+        </div>
+      `;
+      contenedor.appendChild(card);
+    });
   }
 
-  lista.forEach((prod, index) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <img src="img/${prod.imagenes[0]}" alt="${prod.nombre}" class="card-img">
-      <div class="card-body">
-        <h3 class="card-title">${prod.nombre}</h3>
-        <p class="card-desc">${prod.descripcion || ""}</p>
-        <p class="card-price"><strong>${formatoPrecio(prod.precio)}</strong></p>
-      </div>
-    `;
-    contenedor.appendChild(card);
+// Modal
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modal-img");
+const modalNombre = document.getElementById("modal-nombre");
+const modalDescripcion = document.getElementById("modal-descripcion");
+const modalPrecio = document.getElementById("modal-precio");
+const modalClose = document.querySelector(".modal-close");
 
-    // Click para abrir modal
-    card.addEventListener("click", () => abrirModal(prod));
+// Función para abrir modal con producto
+function abrirModal(prod) {
+  modal.style.display = "flex";
+  modalImg.src = `img/${prod.imagen}`;
+  modalImg.alt = prod.nombre;
+  modalNombre.textContent = prod.nombre;
+  modalDescripcion.textContent = prod.descripcion || "";
+  modalPrecio.textContent = formatoPrecio(prod.precio);
+}
+
+// Cerrar modal al hacer click en X o fuera del contenido
+modalClose.addEventListener("click", () => modal.style.display = "none");
+modal.addEventListener("click", e => {
+  if (e.target === modal) modal.style.display = "none";
+});
+
+// Agregar listener a cada tarjeta
+function agregarListenersTarjetas() {
+  document.querySelectorAll(".card").forEach((card, index) => {
+    card.addEventListener("click", () => abrirModal(productosOriginales[index]));
   });
 }
 
-// Filtros y orden
+// Llamar después de renderizar
+const originalRenderProductos = renderProductos;
+renderProductos = function(lista) {
+  originalRenderProductos(lista);
+  agregarListenersTarjetas();
+};
+
 function aplicarFiltros() {
   const query = document.getElementById("buscador")?.value.trim().toLowerCase() || "";
   const cat = document.getElementById("filtro-categoria")?.value || "";
@@ -77,7 +109,6 @@ function aplicarFiltros() {
   renderProductos(filtrados);
 }
 
-// Inicializar filtros
 function initFiltros() {
   ["buscador", "filtro-categoria", "filtro-min", "filtro-max", "filtro-orden"].forEach((id) => {
     const el = document.getElementById(id);
@@ -86,13 +117,12 @@ function initFiltros() {
   });
 }
 
-// Cargar productos JSON
 async function cargarProductos() {
   try {
     const res = await fetch("data/productos.json");
     productosOriginales = await res.json();
 
-    // Rellenar categorías únicas
+    // rellenar categorías únicas
     const categorias = [...new Set(productosOriginales.map((p) => p.categoria))];
     const select = document.getElementById("filtro-categoria");
     categorias.forEach((c) => {
@@ -112,11 +142,11 @@ async function cargarProductos() {
   }
 }
 
-// Tema oscuro
 function initTema() {
   const btn = document.getElementById("btn-tema");
   if (!btn) return;
 
+  // cargar preferencia previa
   const temaGuardado = localStorage.getItem("tema");
   if (temaGuardado === "dark") {
     document.body.classList.add("dark");
@@ -131,15 +161,8 @@ function initTema() {
   });
 }
 
-// Modal y slider de imágenes
-const modal = document.getElementById("modal");
-const modalImg = document.getElementById("modal-img");
-const modalNombre = document.getElementById("modal-nombre");
-const modalDescripcion = document.getElementById("modal-descripcion");
-const modalPrecio = document.getElementById("modal-precio");
-const modalClose = document.querySelector(".modal-close");
-const prevBtn = document.getElementById("prev-img");
-const nextBtn = document.getElementById("next-img");
+// ejecutar junto a cargarProductos()
+cargarProductos().then(initTema);
 
 let imagenActual = 0;
 let imagenesProducto = [];
@@ -158,24 +181,16 @@ function actualizarImagen() {
   modalImg.src = `img/${imagenesProducto[imagenActual]}`;
 }
 
-modalClose.addEventListener("click", () => modal.style.display = "none");
-modal.addEventListener("click", e => {
-  if (e.target === modal) modal.style.display = "none";
-});
-
-prevBtn.addEventListener("click", e => {
+document.getElementById("prev-img").addEventListener("click", (e) => {
   e.stopPropagation();
   if (imagenesProducto.length === 0) return;
   imagenActual = (imagenActual - 1 + imagenesProducto.length) % imagenesProducto.length;
   actualizarImagen();
 });
 
-nextBtn.addEventListener("click", e => {
+document.getElementById("next-img").addEventListener("click", (e) => {
   e.stopPropagation();
   if (imagenesProducto.length === 0) return;
   imagenActual = (imagenActual + 1) % imagenesProducto.length;
   actualizarImagen();
 });
-
-// Inicialización
-cargarProductos().then(initTema);
