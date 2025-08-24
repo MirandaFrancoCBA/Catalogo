@@ -1,0 +1,14 @@
+[
+    {
+      "nombre": "Maceta de cerámica",
+      "descripcion": "Maceta artesanal pintada a mano",
+      "precio": 2500,
+      "imagen": "maceta1.jpg"
+    },
+    {
+      "nombre": "Maceta grande de cemento",
+      "descripcion": "Ideal para plantas de interior",
+      "precio": 4500,
+      "imagen": "maceta2.jpg"
+    }
+  ]
