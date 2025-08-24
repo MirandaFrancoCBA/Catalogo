@@ -44,30 +44,39 @@ function aplicarFiltros() {
   const cat = document.getElementById("filtro-categoria")?.value || "";
   const min = parseFloat(document.getElementById("filtro-min")?.value) || 0;
   const max = parseFloat(document.getElementById("filtro-max")?.value) || Infinity;
+  const orden = document.getElementById("filtro-orden")?.value || "";
 
-  const filtrados = productosOriginales.filter((p) => {
+  let filtrados = productosOriginales.filter((p) => {
     const nombre = (p.nombre || "").toLowerCase();
     const desc = (p.descripcion || "").toLowerCase();
     const coincideBusqueda = !query || nombre.includes(query) || desc.includes(query);
     const coincideCat = !cat || p.categoria === cat;
     const coincidePrecio = p.precio >= min && p.precio <= max;
-
     return coincideBusqueda && coincideCat && coincidePrecio;
   });
+
+  // Ordenamiento
+  if (orden) {
+    filtrados.sort((a, b) => {
+      switch (orden) {
+        case "precio-asc": return a.precio - b.precio;
+        case "precio-desc": return b.precio - a.precio;
+        case "nombre-asc": return a.nombre.localeCompare(b.nombre, "es");
+        case "nombre-desc": return b.nombre.localeCompare(a.nombre, "es");
+        default: return 0;
+      }
+    });
+  }
 
   renderProductos(filtrados);
 }
 
 function initFiltros() {
-  const buscador = document.getElementById("buscador");
-  const cat = document.getElementById("filtro-categoria");
-  const min = document.getElementById("filtro-min");
-  const max = document.getElementById("filtro-max");
-
-  if (buscador) buscador.addEventListener("input", aplicarFiltros);
-  if (cat) cat.addEventListener("change", aplicarFiltros);
-  if (min) min.addEventListener("input", aplicarFiltros);
-  if (max) max.addEventListener("input", aplicarFiltros);
+  ["buscador", "filtro-categoria", "filtro-min", "filtro-max", "filtro-orden"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("input", aplicarFiltros);
+    if (el && el.tagName === "SELECT") el.addEventListener("change", aplicarFiltros);
+  });
 }
 
 async function cargarProductos() {
@@ -75,7 +84,7 @@ async function cargarProductos() {
     const res = await fetch("data/productos.json");
     productosOriginales = await res.json();
 
-    // rellenar categorías únicas en el <select>
+    // rellenar categorías únicas
     const categorias = [...new Set(productosOriginales.map((p) => p.categoria))];
     const select = document.getElementById("filtro-categoria");
     categorias.forEach((c) => {
@@ -90,8 +99,8 @@ async function cargarProductos() {
     initFiltros();
   } catch (err) {
     console.error("Error cargando productos:", err);
-    const contenedor = document.getElementById("catalogo");
-    contenedor.innerHTML = `<div class="empty">No se pudo cargar el catálogo.</div>`;
+    document.getElementById("catalogo").innerHTML =
+      `<div class="empty">No se pudo cargar el catálogo.</div>`;
   }
 }
 

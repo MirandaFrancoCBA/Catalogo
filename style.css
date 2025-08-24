@@ -115,3 +115,7 @@ body {
     font-size: 0.9rem;
     min-width: 120px;
   }
+
+  .filtros label {
+    min-width: 140px;
+  }

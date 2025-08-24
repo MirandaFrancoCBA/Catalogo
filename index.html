@@ -31,15 +31,26 @@
             <option value="">Todas</option>
           </select>
         </label>
-    
+      
         <label>
           Precio mín:
           <input type="number" id="filtro-min" placeholder="0" min="0" />
         </label>
-    
+      
         <label>
           Precio máx:
           <input type="number" id="filtro-max" placeholder="99999" min="0" />
+        </label>
+      
+        <label>
+          Ordenar por:
+          <select id="filtro-orden">
+            <option value="">Por defecto</option>
+            <option value="precio-asc">Precio (menor a mayor)</option>
+            <option value="precio-desc">Precio (mayor a menor)</option>
+            <option value="nombre-asc">Nombre (A → Z)</option>
+            <option value="nombre-desc">Nombre (Z → A)</option>
+          </select>
         </label>
       </section>
     
