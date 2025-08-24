@@ -13,31 +13,31 @@ function formatoPrecio(valor) {
 }
 
 function renderProductos(lista) {
-  const contenedor = document.getElementById("catalogo");
-  contenedor.innerHTML = "";
-
-  if (!lista.length) {
-    const vacio = document.createElement("div");
-    vacio.className = "empty";
-    vacio.textContent = "No hay productos que coincidan con la búsqueda.";
-    contenedor.appendChild(vacio);
-    return;
+    const contenedor = document.getElementById("catalogo");
+    contenedor.innerHTML = "";
+  
+    if (!lista.length) {
+      const vacio = document.createElement("div");
+      vacio.className = "empty";
+      vacio.textContent = "No hay productos que coincidan con la búsqueda.";
+      contenedor.appendChild(vacio);
+      return;
+    }
+  
+    lista.forEach((prod) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="img/${prod.imagen}" alt="${prod.nombre}" class="card-img">
+        <div class="card-body">
+          <h3 class="card-title">${prod.nombre}</h3>
+          <p class="card-desc">${prod.descripcion || ""}</p>
+          <p class="card-price"><strong>${formatoPrecio(prod.precio)}</strong></p>
+        </div>
+      `;
+      contenedor.appendChild(card);
+    });
   }
-
-  lista.forEach((prod) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <img src="img/${prod.imagen}" alt="${prod.nombre}">
-      <div class="card-body">
-        <h3>${prod.nombre}</h3>
-        <p>${prod.descripcion || ""}</p>
-        <p><strong>${formatoPrecio(prod.precio)}</strong></p>
-      </div>
-    `;
-    contenedor.appendChild(card);
-  });
-}
 
 function aplicarFiltros() {
   const query = document.getElementById("buscador")?.value.trim().toLowerCase() || "";
@@ -104,26 +104,24 @@ async function cargarProductos() {
   }
 }
 
-cargarProductos();
-
 function initTema() {
-    const btn = document.getElementById("btn-tema");
-    if (!btn) return;
-  
-    // cargar preferencia previa
-    const temaGuardado = localStorage.getItem("tema");
-    if (temaGuardado === "dark") {
-      document.body.classList.add("dark");
-      btn.textContent = "☀️ Modo claro";
-    }
-  
-    btn.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      const esOscuro = document.body.classList.contains("dark");
-      btn.textContent = esOscuro ? "☀️ Modo claro" : "🌙 Modo oscuro";
-      localStorage.setItem("tema", esOscuro ? "dark" : "light");
-    });
+  const btn = document.getElementById("btn-tema");
+  if (!btn) return;
+
+  // cargar preferencia previa
+  const temaGuardado = localStorage.getItem("tema");
+  if (temaGuardado === "dark") {
+    document.body.classList.add("dark");
+    btn.textContent = "☀️ Modo claro";
   }
-  
-  // ejecutar junto a cargarProductos()
-  cargarProductos().then(initTema);
+
+  btn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const esOscuro = document.body.classList.contains("dark");
+    btn.textContent = esOscuro ? "☀️ Modo claro" : "🌙 Modo oscuro";
+    localStorage.setItem("tema", esOscuro ? "dark" : "light");
+  });
+}
+
+// ejecutar junto a cargarProductos()
+cargarProductos().then(initTema);
