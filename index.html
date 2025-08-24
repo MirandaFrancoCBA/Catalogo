@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Catálogo | Mi Emprendimiento</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -13,11 +13,46 @@
   </header>
 
   <main>
-    <section id="catalogo" class="grid"></section>
+    <!-- Barra de búsqueda -->
+    <section class="toolbar">
+      <input
+        type="search"
+        id="buscador"
+        placeholder="Buscar productos..."
+        aria-label="Buscar productos por nombre o descripción"
+        autocomplete="off"
+      />
+    </section>
+
+    <section class="filtros">
+        <label>
+          Categoría:
+          <select id="filtro-categoria">
+            <option value="">Todas</option>
+          </select>
+        </label>
+    
+        <label>
+          Precio mín:
+          <input type="number" id="filtro-min" placeholder="0" min="0" />
+        </label>
+    
+        <label>
+          Precio máx:
+          <input type="number" id="filtro-max" placeholder="99999" min="0" />
+        </label>
+      </section>
+    
+
+    <!-- Contenedor del catálogo -->
+    <section id="catalogo" class="grid" aria-live="polite"></section>
   </main>
 
   <footer>
-    <p>© 2025 - Mi Emprendimiento | <a href="https://wa.me/5493804682803" target="_blank">Contactar por WhatsApp</a></p>
+    <p>
+      © 2025 - Mi Emprendimiento |
+      <a href="https://wa.me/5493804682803" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+    </p>
   </footer>
 
   <script src="script.js"></script>
