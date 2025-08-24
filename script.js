@@ -105,3 +105,25 @@ async function cargarProductos() {
 }
 
 cargarProductos();
+
+function initTema() {
+    const btn = document.getElementById("btn-tema");
+    if (!btn) return;
+  
+    // cargar preferencia previa
+    const temaGuardado = localStorage.getItem("tema");
+    if (temaGuardado === "dark") {
+      document.body.classList.add("dark");
+      btn.textContent = "☀️ Modo claro";
+    }
+  
+    btn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      const esOscuro = document.body.classList.contains("dark");
+      btn.textContent = esOscuro ? "☀️ Modo claro" : "🌙 Modo oscuro";
+      localStorage.setItem("tema", esOscuro ? "dark" : "light");
+    });
+  }
+  
+  // ejecutar junto a cargarProductos()
+  cargarProductos().then(initTema);

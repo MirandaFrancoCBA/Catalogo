@@ -119,3 +119,62 @@ body {
   .filtros label {
     min-width: 140px;
   }
+
+  /* Botón de cambio de tema */
+.theme-toggle {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .theme-toggle button {
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    background: white;
+    color: #2e7d32;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .theme-toggle button:hover {
+    background: #e0e0e0;
+  }
+  
+  /* 🌙 Dark mode */
+  body.dark {
+    background: #121212;
+    color: #eee;
+  }
+  
+  body.dark header {
+    background: #1b5e20;
+  }
+  
+  body.dark footer {
+    background: #1e1e1e;
+    color: #ccc;
+  }
+  
+  body.dark .card {
+    background: #1f1f1f;
+    color: #eee;
+    box-shadow: 0 2px 6px rgba(255,255,255,0.1);
+  }
+  
+  body.dark .filtros {
+    background: #1a1a1a;
+    border-color: #333;
+  }
+  
+  body.dark input,
+  body.dark select {
+    background: #2a2a2a;
+    color: #eee;
+    border: 1px solid #555;
+  }
+  
+  body.dark #buscador {
+    border-color: #444;
+  }
