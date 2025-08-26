@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catálogo | El Laberinto </title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <h1>Catálogo de Productos</h1>
-    <p>Bienvenido a EL Laberinto 🌿</p>
-    <div class="theme-toggle">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo | El Laberinto</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="responsive.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Catálogo de Productos 2025</h1>
+      <p>Bienvenido a EL Laberinto 🌿</p>
+      <div class="theme-toggle">
         <button id="btn-tema" aria-label="Cambiar tema">🌙 Modo oscuro</button>
       </div>
-  </header>
+    </header>
 
-  <main>
-    <!-- Barra de búsqueda -->
-    <section class="toolbar">
-      <input
-        type="search"
-        id="buscador"
-        placeholder="Buscar productos..."
-        aria-label="Buscar productos por nombre o descripción"
-        autocomplete="off"
-      />
-    </section>
+    <main>
+      <!-- Barra de búsqueda -->
+      <section class="toolbar">
+        <input
+          type="search"
+          id="buscador"
+          placeholder="Buscar productos..."
+          aria-label="Buscar productos por nombre o descripción"
+          autocomplete="off"
+        />
+      </section>
 
-    <section class="filtros">
-        <label>
+      <section class="filtros">
+        <label data-texto="filtroCategoria">
           Categoría:
           <select id="filtro-categoria">
             <option value="">Todas</option>
           </select>
         </label>
-      
-        <label>
+
+        <label data-texto="filtroMin">
           Precio mín:
           <input type="number" id="filtro-min" placeholder="0" min="0" />
         </label>
-      
-        <label>
+
+        <label data-texto="filtroMax">
           Precio máx:
           <input type="number" id="filtro-max" placeholder="99999" min="0" />
         </label>
-      
-        <label>
+
+        <label data-texto="filtroOrden">
           Ordenar por:
           <select id="filtro-orden">
             <option value="">Por defecto</option>
@@ -56,36 +57,57 @@
           </select>
         </label>
       </section>
-    
 
-    <!-- Contenedor del catálogo -->
-    <section id="catalogo" class="grid" aria-live="polite"></section>
-  </main>
+      <!-- Contenedor del catálogo -->
+      <section id="catalogo" class="grid" aria-live="polite"></section>
+    </main>
 
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="modal-close">&times;</span>
-      
-      <!-- Galería de imágenes -->
-      <div class="modal-img-container">
-        <img id="modal-img" src="" alt="">
-        <button id="prev-img" class="modal-nav">&lt;</button>
-        <button id="next-img" class="modal-nav">&gt;</button>
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+
+        <!-- Galería de imágenes -->
+        <div class="modal-img-container">
+          <img id="modal-img" src="" alt="" />
+          <button id="prev-img" class="modal-nav">&lt;</button>
+          <button id="next-img" class="modal-nav">&gt;</button>
+        </div>
+
+        <!-- Info del producto -->
+        <h3 id="modal-nombre"></h3>
+        <p id="modal-descripcion"></p>
+        <p id="modal-precio"></p>
       </div>
-      
-      <!-- Info del producto -->
-      <h3 id="modal-nombre"></h3>
-      <p id="modal-descripcion"></p>
-      <p id="modal-precio"></p>
     </div>
-  </div>
-  <footer>
-    <p>
-      © 2025 - El Laberinto - Bialet Massé |
-      <a href="https://wa.me/5493804682803" target="_blank" rel="noopener">Contactar por WhatsApp</a>
-    </p>
-  </footer>
+    <footer>
+      <p>
+        © 2025 - El Laberinto - Bialet Massé |
+        <a href="https://wa.me/5493804682803" target="_blank" rel="noopener"
+          >Contactar por WhatsApp</a
+        >
+      </p>
+    </footer>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+
+    <a
+      href="https://wa.me/5493804682803"
+      class="whatsapp-float"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="WhatsApp"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 32 32"
+        width="40"
+        height="40"
+        fill="white"
+      >
+        <path
+          d="M16 .5C7.44.5.5 7.44.5 16c0 2.73.7 5.39 2.04 7.73L.55 31.5l7.96-2.07C10.9 30.81 13.42 31.5 16 31.5c8.56 0 15.5-6.94 15.5-15.5S24.56.5 16 .5zm0 28c-2.28 0-4.5-.6-6.46-1.72l-.46-.27-4.73 1.23 1.27-4.6-.3-.47A12.46 12.46 0 013.5 16c0-6.89 5.61-12.5 12.5-12.5S28.5 9.11 28.5 16 22.89 28.5 16 28.5zm7.13-9.06c-.39-.2-2.29-1.13-2.64-1.26-.35-.13-.61-.2-.87.2-.26.39-1 1.26-1.23 1.52-.23.26-.45.3-.84.1-.39-.2-1.63-.6-3.11-1.91-1.15-1.02-1.93-2.29-2.16-2.67-.23-.39-.02-.6.17-.8.17-.17.39-.45.58-.68.2-.23.26-.39.39-.65.13-.26.07-.49-.03-.68-.1-.2-.87-2.09-1.2-2.86-.32-.77-.65-.66-.87-.67h-.74c-.26 0-.68.1-1.03.49-.35.39-1.35 1.32-1.35 3.23 0 1.91 1.39 3.75 1.58 4.01.2.26 2.72 4.15 6.6 5.82.92.4 1.64.64 2.2.82.92.29 1.76.25 2.42.15.74-.11 2.29-.93 2.61-1.83.32-.9.32-1.68.23-1.83-.1-.15-.35-.26-.74-.45z"
+        />
+      </svg>
+    </a>
+  </body>
 </html>

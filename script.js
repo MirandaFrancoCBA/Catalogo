@@ -178,5 +178,57 @@ nextBtn.addEventListener("click", e => {
   actualizarImagen();
 });
 
+const textos = {
+    es: {
+      buscadorPlaceholder: "Buscar productos...",
+      filtroCategoria: "Categoría:",
+      filtroMin: "Precio mín:",
+      filtroMax: "Precio máx:",
+      filtroOrden: "Ordenar por:",
+      vacio: "No hay productos que coincidan con la búsqueda.",
+      btnModoClaro: "☀️ Modo claro",
+      btnModoOscuro: "🌙 Modo oscuro"
+    },
+    en: {
+      buscadorPlaceholder: "Search product...",
+      filtroCategoria: "Category:",
+      filtroMin: "Min price:",
+      filtroMax: "Max price:",
+      filtroOrden: "Sort by:",
+      vacio: "No products match the search.",
+      btnModoClaro: "☀️ Light mode",
+      btnModoOscuro: "🌙 Dark mode"
+    }
+  };
+  
+  let idiomaActual = "es";
+  
+  function cambiarIdioma(lang) {
+    idiomaActual = lang;
+  
+    // placeholder buscador
+    const buscador = document.getElementById("buscador");
+    if (buscador) buscador.placeholder = textos[idiomaActual].buscadorPlaceholder;
+  
+    // labels filtros
+    document.querySelectorAll("[data-texto]").forEach(el => {
+      const key = el.dataset.texto;
+      if (textos[idiomaActual][key]) el.firstChild.textContent = textos[idiomaActual][key] + " ";
+    });
+  
+    // mensaje vacío
+    const emptyDiv = document.querySelector(".empty");
+    if (emptyDiv) emptyDiv.textContent = textos[idiomaActual].vacio;
+  
+    // botón de tema
+    const btn = document.getElementById("btn-tema");
+    if (btn) {
+      const esOscuro = document.body.classList.contains("dark");
+      btn.textContent = esOscuro ? textos[idiomaActual].btnModoClaro : textos[idiomaActual].btnModoOscuro;
+    }
+  }
 // Inicialización
 cargarProductos().then(initTema);
+document.addEventListener("DOMContentLoaded", () => {
+    cambiarIdioma(idiomaActual);
+});
