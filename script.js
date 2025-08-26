@@ -39,6 +39,7 @@ function renderProductos(lista) {
     `;
     contenedor.appendChild(card);
 
+    setTimeout(() => card.classList.add("show"), 50);
     // Click para abrir modal
     card.addEventListener("click", () => abrirModal(prod));
   });

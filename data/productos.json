@@ -3,7 +3,7 @@
       "nombre": "Maceta de cerámica",
       "descripcion": "Maceta artesanal pintada a mano",
       "precio": 2500,
-      "imagenes": ["maceta1.jpg"],
+      "imagenes": ["maceta1.jpg", "maceta1-1.jpg", "maceta1-2.jpg"],
       "categoria": "Cerámica"
     },
     {
