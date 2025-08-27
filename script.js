@@ -38,16 +38,13 @@ function renderProductos(lista) {
       </div>
     `;
     contenedor.appendChild(card);
-
-    // Animación de aparición con retraso según índice
     setTimeout(() => card.classList.add("show"), index * 100);
 
-    // Click para abrir modal
     card.addEventListener("click", () => abrirModal(prod));
   });
 }
 
-// Filtros y orden
+// Aplicar filtros
 function aplicarFiltros() {
   const query = document.getElementById("buscador")?.value.trim().toLowerCase() || "";
   const cat = document.getElementById("filtro-categoria")?.value || "";
@@ -63,11 +60,12 @@ function aplicarFiltros() {
     const coincideBusqueda = !query || nombre.includes(query) || desc.includes(query);
     const coincideCat = !cat || p.categoria === cat;
     const coincideTipo = !tipo || p.tipo === tipo;
-    const coincideEstado = !estado || (p.estado === estado);
+    const coincideEstado = !estado || p.estado === estado;
     const coincidePrecio = p.precio >= min && p.precio <= max;
     return coincideBusqueda && coincideCat && coincideTipo && coincideEstado && coincidePrecio;
   });
 
+  // Ordenamiento
   if (orden) {
     filtrados.sort((a, b) => {
       switch (orden) {
@@ -92,37 +90,27 @@ function initFiltros() {
   });
 }
 
-// Cargar productos JSON
+// Cargar productos JSON y rellenar select
 async function cargarProductos() {
   try {
     const res = await fetch("data/productos.json");
     productosOriginales = await res.json();
 
-    // Rellenar categorías únicas
-    const categorias = [...new Set(productosOriginales.map((p) => p.categoria))];
-    const selectCat = document.getElementById("filtro-categoria");
-    categorias.forEach((c) => {
-      if (!c) return;
-      const opt = document.createElement("option");
-      opt.value = c;
-      opt.textContent = c;
-      selectCat.appendChild(opt);
-    });
+    const categorias = [...new Set(productosOriginales.map(p => p.categoria))];
+    const tipos = [...new Set(productosOriginales.map(p => p.tipo))];
+    const estados = [...new Set(productosOriginales.map(p => p.estado))];
 
-    // Rellenar tipos únicos
-    const tipos = [...new Set(productosOriginales.map(p => p.tipo).filter(Boolean))];
+    const selectCat = document.getElementById("filtro-categoria");
+    categorias.forEach(c => { if(c) selectCat.appendChild(new Option(c, c)); });
+
     const selectTipo = document.getElementById("filtro-tipo");
-    tipos.forEach(t => {
-      const opt = document.createElement("option");
-      opt.value = t;
-      opt.textContent = t;
-      selectTipo.appendChild(opt);
-    });
+    tipos.forEach(t => { if(t) selectTipo.appendChild(new Option(t, t)); });
+
+    const selectEstado = document.getElementById("filtro-estado");
+    estados.forEach(e => { if(e) selectEstado.appendChild(new Option(e, e)); });
 
     renderProductos(productosOriginales);
     initFiltros();
-
-    // Aplicar idioma después de cargar productos
     cambiarIdioma(idiomaActual);
 
   } catch (err) {
@@ -266,6 +254,7 @@ function cambiarIdioma(lang) {
   if (btnActivo) btnActivo.classList.add("active");
 }
 
-// Inicialización
-cargarProductos().then(initTema);
-document.addEventListener("DOMContentLoaded", () => cambiarIdioma(idiomaActual));
+document.addEventListener("DOMContentLoaded", () => {
+    cargarProductos().then(initTema);
+    cambiarIdioma(idiomaActual);
+  });

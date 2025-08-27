@@ -39,17 +39,31 @@
             <option value="">Todas</option>
           </select>
         </label>
-
+      
+        <label data-texto="filtroTipo">
+          Tipo:
+          <select id="filtro-tipo">
+            <option value="">Todos</option>
+          </select>
+        </label>
+      
+        <label data-texto="filtroEstado">
+          Estado:
+          <select id="filtro-estado">
+            <option value="">Todos</option>
+          </select>
+        </label>
+      
         <label data-texto="filtroMin">
           Precio mín:
           <input type="number" id="filtro-min" placeholder="0" min="0" />
         </label>
-
+      
         <label data-texto="filtroMax">
           Precio máx:
           <input type="number" id="filtro-max" placeholder="99999" min="0" />
         </label>
-
+      
         <label data-texto="filtroOrden">
           Ordenar por:
           <select id="filtro-orden">
@@ -61,6 +75,7 @@
           </select>
         </label>
       </section>
+      
 
       <!-- Contenedor del catálogo -->
       <section id="catalogo" class="grid" aria-live="polite"></section>
