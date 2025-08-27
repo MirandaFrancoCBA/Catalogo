@@ -13,7 +13,7 @@ function formatoPrecio(valor) {
   }
 }
 
-// Renderizar productos
+// Renderizar productos con animación
 function renderProductos(lista) {
   const contenedor = document.getElementById("catalogo");
   contenedor.innerHTML = "";
@@ -39,7 +39,8 @@ function renderProductos(lista) {
     `;
     contenedor.appendChild(card);
 
-    setTimeout(() => card.classList.add("show"), 50);
+    // Animación de aparición con retraso según índice
+    setTimeout(() => card.classList.add("show"), index * 100);
 
     // Click para abrir modal
     card.addEventListener("click", () => abrirModal(prod));
@@ -50,6 +51,8 @@ function renderProductos(lista) {
 function aplicarFiltros() {
   const query = document.getElementById("buscador")?.value.trim().toLowerCase() || "";
   const cat = document.getElementById("filtro-categoria")?.value || "";
+  const tipo = document.getElementById("filtro-tipo")?.value || "";
+  const estado = document.getElementById("filtro-estado")?.value || "";
   const min = parseFloat(document.getElementById("filtro-min")?.value) || 0;
   const max = parseFloat(document.getElementById("filtro-max")?.value) || Infinity;
   const orden = document.getElementById("filtro-orden")?.value || "";
@@ -59,11 +62,12 @@ function aplicarFiltros() {
     const desc = (p.descripcion || "").toLowerCase();
     const coincideBusqueda = !query || nombre.includes(query) || desc.includes(query);
     const coincideCat = !cat || p.categoria === cat;
+    const coincideTipo = !tipo || p.tipo === tipo;
+    const coincideEstado = !estado || (p.estado === estado);
     const coincidePrecio = p.precio >= min && p.precio <= max;
-    return coincideBusqueda && coincideCat && coincidePrecio;
+    return coincideBusqueda && coincideCat && coincideTipo && coincideEstado && coincidePrecio;
   });
 
-  // Ordenamiento
   if (orden) {
     filtrados.sort((a, b) => {
       switch (orden) {
@@ -81,7 +85,7 @@ function aplicarFiltros() {
 
 // Inicializar filtros
 function initFiltros() {
-  ["buscador", "filtro-categoria", "filtro-min", "filtro-max", "filtro-orden"].forEach((id) => {
+  ["buscador", "filtro-categoria", "filtro-tipo", "filtro-estado", "filtro-min", "filtro-max", "filtro-orden"].forEach((id) => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", aplicarFiltros);
     if (el && el.tagName === "SELECT") el.addEventListener("change", aplicarFiltros);
@@ -96,13 +100,23 @@ async function cargarProductos() {
 
     // Rellenar categorías únicas
     const categorias = [...new Set(productosOriginales.map((p) => p.categoria))];
-    const select = document.getElementById("filtro-categoria");
+    const selectCat = document.getElementById("filtro-categoria");
     categorias.forEach((c) => {
       if (!c) return;
       const opt = document.createElement("option");
       opt.value = c;
       opt.textContent = c;
-      select.appendChild(opt);
+      selectCat.appendChild(opt);
+    });
+
+    // Rellenar tipos únicos
+    const tipos = [...new Set(productosOriginales.map(p => p.tipo).filter(Boolean))];
+    const selectTipo = document.getElementById("filtro-tipo");
+    tipos.forEach(t => {
+      const opt = document.createElement("option");
+      opt.value = t;
+      opt.textContent = t;
+      selectTipo.appendChild(opt);
     });
 
     renderProductos(productosOriginales);
@@ -161,7 +175,9 @@ function abrirModal(prod) {
 }
 
 function actualizarImagen() {
-  modalImg.src = `img/${imagenesProducto[imagenActual]}`;
+  if (imagenesProducto.length) {
+    modalImg.src = `img/${imagenesProducto[imagenActual]}`;
+  }
 }
 
 modalClose.addEventListener("click", () => modal.classList.add("hidden"));
@@ -188,6 +204,8 @@ const textos = {
   es: {
     buscadorPlaceholder: "Buscar productos...",
     filtroCategoria: "Categoría:",
+    filtroTipo: "Tipo:",
+    filtroEstado: "Estado:",
     filtroMin: "Precio mín:",
     filtroMax: "Precio máx:",
     filtroOrden: "Ordenar por:",
@@ -198,6 +216,8 @@ const textos = {
   en: {
     buscadorPlaceholder: "Search products...",
     filtroCategoria: "Category:",
+    filtroTipo: "Type:",
+    filtroEstado: "State:",
     filtroMin: "Min price:",
     filtroMax: "Max price:",
     filtroOrden: "Sort by:",
@@ -239,12 +259,11 @@ function cambiarIdioma(lang) {
     const esOscuro = document.body.classList.contains("dark");
     btn.textContent = esOscuro ? textos[idiomaActual].btnModoClaro : textos[idiomaActual].btnModoOscuro;
   }
-    // Marcar botón activo
-    document.querySelectorAll(".lang-toggle button").forEach(b => {
-        b.classList.remove("active");
-      });
-      const btnActivo = document.querySelector(`.lang-toggle button[onclick="cambiarIdioma('${idiomaActual}')"]`);
-      if (btnActivo) btnActivo.classList.add("active");
+
+  // marcar botón activo
+  document.querySelectorAll(".lang-toggle button").forEach(b => b.classList.remove("active"));
+  const btnActivo = document.querySelector(`.lang-toggle button[onclick="cambiarIdioma('${idiomaActual}')"]`);
+  if (btnActivo) btnActivo.classList.add("active");
 }
 
 // Inicialización

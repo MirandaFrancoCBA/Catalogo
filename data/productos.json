@@ -1,23 +1,75 @@
 [
     {
-      "nombre": "Maceta de cerámica",
-      "descripcion": "Maceta artesanal pintada a mano",
+      "nombre": "Maceta de cerámica pintada",
+      "descripcion": "Maceta artesanal de cerámica, pintada a mano",
       "precio": 2500,
-      "imagenes": ["maceta1.jpg", "maceta1-1.jpg", "maceta1-2.jpg"],
-      "categoria": "Cerámica"
+      "imagenes": ["maceta_ceramica_pintada1.jpg", "maceta_ceramica_pintada2.jpg"],
+      "categoria": "Cerámica",
+      "tipo": "Maceta",
+      "estado": "Pintada"
     },
     {
-      "nombre": "Maceta grande de cemento",
-      "descripcion": "Ideal para plantas de interior",
+      "nombre": "Jarrón de cerámica en crudo",
+      "descripcion": "Jarrón artesanal de cerámica sin pintar",
+      "precio": 3200,
+      "imagenes": ["jarron_ceramica_crudo1.jpg"],
+      "categoria": "Cerámica",
+      "tipo": "Jarrón",
+      "estado": "En crudo"
+    },
+    {
+      "nombre": "Maceta grande de cemento pintada",
+      "descripcion": "Maceta resistente para interior y exterior",
       "precio": 4500,
-      "imagenes": ["maceta2.jpg"],
-      "categoria": "Cemento"
+      "imagenes": ["maceta_cemento_pintada1.jpg"],
+      "categoria": "Cemento",
+      "tipo": "Maceta",
+      "estado": "Pintada"
     },
     {
-      "nombre": "Maceta chica de plástico",
-      "descripcion": "Resistente y liviana",
-      "precio": 1200,
-      "imagenes": ["maceta3.jpg"],
-      "categoria": "Plástico"
+      "nombre": "Jarrón de cemento en crudo",
+      "descripcion": "Jarrón de cemento sin pintar, diseño minimalista",
+      "precio": 3800,
+      "imagenes": ["jarron_cemento_crudo1.jpg"],
+      "categoria": "Cemento",
+      "tipo": "Jarrón",
+      "estado": "En crudo"
+    },
+    {
+      "nombre": "Figura de yeso decorativa",
+      "descripcion": "Figura artesanal de yeso pintada a mano",
+      "precio": 1800,
+      "imagenes": ["figura_yeso1.jpg"],
+      "categoria": "Yeso",
+      "tipo": "Figura",
+      "estado": "Pintada"
+    },
+    {
+      "nombre": "Olla de barro para cocina",
+      "descripcion": "Olla tradicional de barro, ideal para guisos",
+      "precio": 2900,
+      "imagenes": ["olla_barro1.jpg"],
+      "categoria": "Varios",
+      "tipo": "Olla",
+      "estado": "Cocina"
+    },
+    {
+      "nombre": "Cazuela de barro",
+      "descripcion": "Cazuela artesanal para horno o fuego directo",
+      "precio": 2200,
+      "imagenes": ["cazuela_barro1.jpg"],
+      "categoria": "Varios",
+      "tipo": "Cazuela",
+      "estado": "Cocina"
+    },
+    {
+      "nombre": "Fuente de agua de barro",
+      "descripcion": "Fuente decorativa para jardín",
+      "precio": 3500,
+      "imagenes": ["fuente_barro1.jpg"],
+      "categoria": "Varios",
+      "tipo": "Fuente",
+      "estado": "Decorativa"
     }
   ]
+  
