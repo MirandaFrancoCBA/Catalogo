@@ -1,93 +1,220 @@
 [
-    {
-      "nombre": "Maceta mediana de cerámica",
-      "descripcion": "Maceta artesanal pintada a mano",
-      "precio": 2500,
-      "imagenes": ["maceta1.jpg", "maceta1-1.jpg"],
-      "categoria": "Cerámica",
-      "tipo": "maceta",
-      "estado": "pintado"
-    },
-    {
-      "nombre": "Maceta chica de cerámica",
-      "descripcion": "Maceta en crudo, lista para pintar",
-      "precio": 1800,
-      "imagenes": ["maceta2.jpg"],
-      "categoria": "Cerámica",
-      "tipo": "maceta",
-      "estado": "crudo"
-    },
-    {
-      "nombre": "Jarrón decorativo de cerámica",
-      "descripcion": "Jarrón pintado artesanalmente",
-      "precio": 3200,
-      "imagenes": ["jarron1.jpg"],
-      "categoria": "Cerámica",
-      "tipo": "jarrón",
-      "estado": "pintado"
-    },
-    {
-      "nombre": "Jarrón de cerámica crudo",
-      "descripcion": "Jarrón en crudo, sin pintar",
-      "precio": 2900,
-      "imagenes": ["jarron2.jpg"],
-      "categoria": "Cerámica",
-      "tipo": "jarrón",
-      "estado": "crudo"
-    },
-    {
-      "nombre": "Maceta grande de cemento",
-      "descripcion": "Maceta lisa pintada, ideal para interior",
-      "precio": 4500,
-      "imagenes": ["maceta3.jpg"],
-      "categoria": "Cemento",
-      "tipo": "maceta",
-      "estado": "pintado"
-    },
-    {
-      "nombre": "Jarrón de cemento crudo",
-      "descripcion": "Jarrón sin pintar, minimalista",
-      "precio": 4000,
-      "imagenes": ["jarron3.jpg"],
-      "categoria": "Cemento",
-      "tipo": "jarrón",
-      "estado": "crudo"
-    },
-    {
-      "nombre": "Fuente de agua de cemento",
-      "descripcion": "Fuente decorativa para jardín",
-      "precio": 7000,
-      "imagenes": ["fuente1.jpg"],
-      "categoria": "Varios/Otros",
-      "tipo": "fuente",
-      "estado": ""
-    },
-    {
-      "nombre": "Figura de yeso",
-      "descripcion": "Figura artesanal para decoración",
-      "precio": 1500,
-      "imagenes": ["figura1.jpg"],
-      "categoria": "Varios/Otros",
-      "tipo": "figura",
-      "estado": ""
-    },
-    {
-      "nombre": "Olla de barro para cocina",
-      "descripcion": "Olla artesanal apta para fuego directo",
-      "precio": 3200,
-      "imagenes": ["olla1.jpg"],
-      "categoria": "Varios/Otros",
-      "tipo": "olla",
-      "estado": ""
-    },
-    {
-      "nombre": "Cazuela de barro",
-      "descripcion": "Ideal para guisos y horno",
-      "precio": 2800,
-      "imagenes": ["cazuela1.jpg"],
-      "categoria": "Varios/Otros",
-      "tipo": "cazuela",
-      "estado": ""
-    }
-  ]
-  
+  {
+    "id": 1,
+    "nombre": "Maceta pequeña clásica",
+    "categoria": "cerámica",
+    "tipo": "maceta",
+    "estado": "crudo",
+    "precio": 2500,
+    "imagenes": [
+      "img/ceramica/maceta_pequena_crudo_1.jpg",
+      "img/ceramica/maceta_pequena_crudo_2.jpg"
+    ],
+    "descripcion": "Maceta de cerámica pequeña, ideal para cactus o suculentas. Terminación en crudo lista para pintar."
+  },
+  {
+    "id": 2,
+    "nombre": "Maceta mediana pintada verde",
+    "categoria": "cerámica",
+    "tipo": "maceta",
+    "estado": "pintado",
+    "precio": 4000,
+    "imagenes": [
+      "img/ceramica/maceta_mediana_verde_1.jpg",
+      "img/ceramica/maceta_mediana_verde_2.jpg"
+    ],
+    "descripcion": "Maceta de cerámica mediana pintada en verde, resistente y elegante."
+  },
+  {
+    "id": 3,
+    "nombre": "Maceta grande rustica",
+    "categoria": "cerámica",
+    "tipo": "maceta",
+    "estado": "crudo",
+    "precio": 6000,
+    "imagenes": [
+      "img/ceramica/maceta_grande_rustica_1.jpg"
+    ],
+    "descripcion": "Maceta de cerámica de gran tamaño, estilo rústico para patios o jardines."
+  },
+  {
+    "id": 4,
+    "nombre": "Jarrón artesanal pintado rojo",
+    "categoria": "cerámica",
+    "tipo": "jarrón",
+    "estado": "pintado",
+    "precio": 5500,
+    "imagenes": [
+      "img/ceramica/jarron_rojo_1.jpg"
+    ],
+    "descripcion": "Jarrón de cerámica pintado en rojo, ideal para decoración interior."
+  },
+  {
+    "id": 5,
+    "nombre": "Figura decorativa búho",
+    "categoria": "cerámica",
+    "tipo": "figura",
+    "estado": "pintado",
+    "precio": 3500,
+    "imagenes": [
+      "img/ceramica/figura_buho_1.jpg"
+    ],
+    "descripcion": "Figura artesanal en forma de búho hecha en cerámica pintada a mano."
+  },
+  {
+    "id": 6,
+    "nombre": "Juego de 3 macetas mini",
+    "categoria": "cerámica",
+    "tipo": "maceta",
+    "estado": "crudo",
+    "precio": 4800,
+    "imagenes": [
+      "img/ceramica/set_mini_macetas_1.jpg"
+    ],
+    "descripcion": "Conjunto de tres macetas pequeñas de cerámica, perfectas para suculentas."
+  },
+  {
+    "id": 7,
+    "nombre": "Maceta de cemento cuadrada chica",
+    "categoria": "cemento",
+    "tipo": "maceta",
+    "estado": "crudo",
+    "precio": 2800,
+    "imagenes": [
+      "img/cemento/maceta_cuadrada_chica_1.jpg"
+    ],
+    "descripcion": "Maceta cuadrada de cemento chica, resistente al exterior."
+  },
+  {
+    "id": 8,
+    "nombre": "Maceta de cemento cilíndrica mediana",
+    "categoria": "cemento",
+    "tipo": "maceta",
+    "estado": "pintado",
+    "precio": 4200,
+    "imagenes": [
+      "img/cemento/maceta_cilindrica_mediana_1.jpg"
+    ],
+    "descripcion": "Maceta cilíndrica de cemento pintada, estilo minimalista."
+  },
+  {
+    "id": 9,
+    "nombre": "Maceta rectangular grande",
+    "categoria": "cemento",
+    "tipo": "maceta",
+    "estado": "crudo",
+    "precio": 7500,
+    "imagenes": [
+      "img/cemento/maceta_rectangular_grande_1.jpg"
+    ],
+    "descripcion": "Maceta rectangular de cemento, ideal para balcones y patios."
+  },
+  {
+    "id": 10,
+    "nombre": "Jarrón de cemento rústico",
+    "categoria": "cemento",
+    "tipo": "jarrón",
+    "estado": "crudo",
+    "precio": 5200,
+    "imagenes": [
+      "img/cemento/jarron_rustico_1.jpg"
+    ],
+    "descripcion": "Jarrón de cemento estilo rústico, fuerte y duradero."
+  },
+  {
+    "id": 11,
+    "nombre": "Figura de jardín rana",
+    "categoria": "cemento",
+    "tipo": "figura",
+    "estado": "pintado",
+    "precio": 3900,
+    "imagenes": [
+      "img/cemento/figura_rana_1.jpg"
+    ],
+    "descripcion": "Figura de rana de cemento pintada, ideal para decorar el jardín."
+  },
+  {
+    "id": 12,
+    "nombre": "Maceta colgante cemento",
+    "categoria": "cemento",
+    "tipo": "maceta",
+    "estado": "crudo",
+    "precio": 3500,
+    "imagenes": [
+      "img/cemento/maceta_colgante_1.jpg"
+    ],
+    "descripcion": "Maceta de cemento colgante con diseño moderno."
+  },
+  {
+    "id": 13,
+    "nombre": "Olla de barro chica",
+    "categoria": "varios",
+    "tipo": "olla",
+    "estado": "crudo",
+    "precio": 7000,
+    "imagenes": [
+      "img/otros/olla_barro_chica_1.jpg"
+    ],
+    "descripcion": "Olla de barro chica apta para horno y fuego directo."
+  },
+  {
+    "id": 14,
+    "nombre": "Cazuela de barro mediana",
+    "categoria": "varios",
+    "tipo": "cazuela",
+    "estado": "crudo",
+    "precio": 6500,
+    "imagenes": [
+      "img/otros/cazuela_barro_mediana_1.jpg"
+    ],
+    "descripcion": "Cazuela de barro mediana para guisos y comidas tradicionales."
+  },
+  {
+    "id": 15,
+    "nombre": "Fuente de agua mediana",
+    "categoria": "varios",
+    "tipo": "fuente",
+    "estado": "crudo",
+    "precio": 12000,
+    "imagenes": [
+      "img/otros/fuente_mediana_1.jpg"
+    ],
+    "descripcion": "Fuente de agua artesanal, perfecta para jardines."
+  },
+  {
+    "id": 16,
+    "nombre": "Olla de barro grande",
+    "categoria": "varios",
+    "tipo": "olla",
+    "estado": "crudo",
+    "precio": 9500,
+    "imagenes": [
+      "img/otros/olla_barro_grande_1.jpg"
+    ],
+    "descripcion": "Olla de barro grande para cocinar al fuego lento."
+  },
+  {
+    "id": 17,
+    "nombre": "Cazuela de barro chica pintada",
+    "categoria": "varios",
+    "tipo": "cazuela",
+    "estado": "pintado",
+    "precio": 6800,
+    "imagenes": [
+      "img/otros/cazuela_pintada_1.jpg"
+    ],
+    "descripcion": "Cazuela chica pintada con diseño artesanal."
+  },
+  {
+    "id": 18,
+    "nombre": "Fuente de agua grande",
+    "categoria": "varios",
+    "tipo": "fuente",
+    "estado": "crudo",
+    "precio": 15000,
+    "imagenes": [
+      "img/otros/fuente_grande_1.jpg"
+    ],
+    "descripcion": "Fuente de agua grande para patios amplios o galerías."
+  }
+]

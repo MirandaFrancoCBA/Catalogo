@@ -1,260 +1,236 @@
-let productosOriginales = [];
+// script.js
 
-// Formatear precio
-function formatoPrecio(valor) {
-  try {
-    return new Intl.NumberFormat("es-AR", {
-      style: "currency",
-      currency: "ARS",
-      maximumFractionDigits: 0
-    }).format(valor);
-  } catch {
-    return `$${valor}`;
-  }
+const grid = document.getElementById("grid");
+const searchInput = document.getElementById("searchInput");
+const categoriaFiltro = document.getElementById("categoriaFiltro");
+const precioMinInput = document.getElementById("precioMin");
+const precioMaxInput = document.getElementById("precioMax");
+const ordenarSelect = document.getElementById("ordenarSelect");
+const modal = document.getElementById("modal");
+const modalBody = document.getElementById("modalBody");
+const modalClose = document.getElementById("modalClose");
+const toggleTema = document.getElementById("toggleTema");
+const toggleLang = document.getElementById("toggleLang");
+
+let productos = [];
+let productosFiltrados = [];
+let idioma = localStorage.getItem("idioma") || "es";
+let temaOscuro = localStorage.getItem("temaOscuro") === "true";
+
+// ✅ ID de tu Google Sheet
+const sheetId = "TU_SHEET_ID"; 
+const sheetUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vRipqgWxJuDRNca219T0SG4e1AM3cwJVix1xgd05gKXXhzOmpnL3KmrUExSXIE7Lpvo2tGvRmywR-w3/pub?output=csv`;
+
+// 📌 Traducciones
+const traducciones = {
+  es: {
+    titulo: "Catálogo de Productos",
+    buscar: "Buscar...",
+    categoria: "Categoría",
+    todas: "Todas",
+    precioMin: "Precio Mín.",
+    precioMax: "Precio Máx.",
+    ordenar: "Ordenar por",
+    nombreAsc: "Nombre (A-Z)",
+    nombreDesc: "Nombre (Z-A)",
+    precioAsc: "Precio (menor a mayor)",
+    precioDesc: "Precio (mayor a menor)",
+    cerrar: "Cerrar",
+  },
+  en: {
+    titulo: "Product Catalog",
+    buscar: "Search...",
+    categoria: "Category",
+    todas: "All",
+    precioMin: "Min Price",
+    precioMax: "Max Price",
+    ordenar: "Sort by",
+    nombreAsc: "Name (A-Z)",
+    nombreDesc: "Name (Z-A)",
+    precioAsc: "Price (low to high)",
+    precioDesc: "Price (high to low)",
+    cerrar: "Close",
+  },
+};
+
+// 📌 Formatear precios
+function formatoPrecio(precio) {
+  return new Intl.NumberFormat(idioma === "es" ? "es-AR" : "en-US", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 0,
+  }).format(precio);
 }
 
-// Renderizar productos con animación
-function renderProductos(lista) {
-  const contenedor = document.getElementById("catalogo");
-  contenedor.innerHTML = "";
-
-  if (!lista.length) {
-    const vacio = document.createElement("div");
-    vacio.className = "empty";
-    vacio.textContent = textos[idiomaActual].vacio;
-    contenedor.appendChild(vacio);
-    return;
-  }
-
-  lista.forEach((prod, index) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <img src="img/${prod.imagenes[0]}" alt="${prod.nombre}" class="card-img">
-      <div class="card-body">
-        <h3 class="card-title">${prod.nombre}</h3>
-        <p class="card-desc">${prod.descripcion || ""}</p>
-        <p class="card-price"><strong>${formatoPrecio(prod.precio)}</strong></p>
-      </div>
-    `;
-    contenedor.appendChild(card);
-    setTimeout(() => card.classList.add("show"), index * 100);
-
-    card.addEventListener("click", () => abrirModal(prod));
-  });
-}
-
-// Aplicar filtros
-function aplicarFiltros() {
-  const query = document.getElementById("buscador")?.value.trim().toLowerCase() || "";
-  const cat = document.getElementById("filtro-categoria")?.value || "";
-  const tipo = document.getElementById("filtro-tipo")?.value || "";
-  const estado = document.getElementById("filtro-estado")?.value || "";
-  const min = parseFloat(document.getElementById("filtro-min")?.value) || 0;
-  const max = parseFloat(document.getElementById("filtro-max")?.value) || Infinity;
-  const orden = document.getElementById("filtro-orden")?.value || "";
-
-  let filtrados = productosOriginales.filter((p) => {
-    const nombre = (p.nombre || "").toLowerCase();
-    const desc = (p.descripcion || "").toLowerCase();
-    const coincideBusqueda = !query || nombre.includes(query) || desc.includes(query);
-    const coincideCat = !cat || p.categoria === cat;
-    const coincideTipo = !tipo || p.tipo === tipo;
-    const coincideEstado = !estado || p.estado === estado;
-    const coincidePrecio = p.precio >= min && p.precio <= max;
-    return coincideBusqueda && coincideCat && coincideTipo && coincideEstado && coincidePrecio;
-  });
-
-  // Ordenamiento
-  if (orden) {
-    filtrados.sort((a, b) => {
-      switch (orden) {
-        case "precio-asc": return a.precio - b.precio;
-        case "precio-desc": return b.precio - a.precio;
-        case "nombre-asc": return a.nombre.localeCompare(b.nombre, "es");
-        case "nombre-desc": return b.nombre.localeCompare(a.nombre, "es");
-        default: return 0;
-      }
-    });
-  }
-
-  renderProductos(filtrados);
-}
-
-// Inicializar filtros
-function initFiltros() {
-  ["buscador", "filtro-categoria", "filtro-tipo", "filtro-estado", "filtro-min", "filtro-max", "filtro-orden"].forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener("input", aplicarFiltros);
-    if (el && el.tagName === "SELECT") el.addEventListener("change", aplicarFiltros);
-  });
-}
-
-// Cargar productos JSON y rellenar select
+// 📌 Cargar productos desde Google Sheets
 async function cargarProductos() {
   try {
-    const res = await fetch("data/productos.json");
-    productosOriginales = await res.json();
+    const response = await fetch(sheetUrl);
+    const data = await response.text();
+    const rows = data.split("\n").map(r => r.split(","));
 
-    const categorias = [...new Set(productosOriginales.map(p => p.categoria))];
-    const tipos = [...new Set(productosOriginales.map(p => p.tipo))];
-    const estados = [...new Set(productosOriginales.map(p => p.estado))];
+    // primera fila = cabecera
+    const headers = rows[0].map(h => h.trim().toLowerCase());
+    productos = rows.slice(1).map(row => {
+      let item = {};
+      headers.forEach((h, i) => {
+        if (h === "precio") {
+          item[h] = parseFloat(row[i]);
+        } else if (h === "imagenes") {
+          item[h] = row[i].split("|").map(url => url.trim());
+        } else {
+          item[h] = row[i].trim();
+        }
+      });
+      return item;
+    });
 
-    const selectCat = document.getElementById("filtro-categoria");
-    categorias.forEach(c => { if(c) selectCat.appendChild(new Option(c, c)); });
-
-    const selectTipo = document.getElementById("filtro-tipo");
-    tipos.forEach(t => { if(t) selectTipo.appendChild(new Option(t, t)); });
-
-    const selectEstado = document.getElementById("filtro-estado");
-    estados.forEach(e => { if(e) selectEstado.appendChild(new Option(e, e)); });
-
-    renderProductos(productosOriginales);
-    initFiltros();
-    cambiarIdioma(idiomaActual);
-
-  } catch (err) {
-    console.error("Error cargando productos:", err);
-    document.getElementById("catalogo").innerHTML =
-      `<div class="empty">${textos[idiomaActual].vacio}</div>`;
+    productosFiltrados = [...productos];
+    mostrarProductos();
+    cargarCategorias();
+  } catch (error) {
+    console.error("Error cargando productos:", error);
   }
 }
 
-// Tema oscuro
-function initTema() {
-  const btn = document.getElementById("btn-tema");
-  if (!btn) return;
+// 📌 Renderizar productos
+function mostrarProductos() {
+  grid.innerHTML = "";
+  productosFiltrados.forEach((producto, index) => {
+    const card = document.createElement("div");
+    card.className =
+      "bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 transform transition duration-300 hover:scale-105 cursor-pointer";
+    card.style.animation = `fadeIn 0.5s ease forwards`;
+    card.style.animationDelay = `${index * 0.1}s`;
 
-  const temaGuardado = localStorage.getItem("tema");
-  if (temaGuardado === "dark") {
-    document.body.classList.add("dark");
-    btn.textContent = textos[idiomaActual].btnModoClaro;
-  }
+    card.innerHTML = `
+      <img src="${producto.imagenes[0]}" alt="${producto.nombre}" class="w-full h-48 object-cover rounded-xl mb-3">
+      <h3 class="text-lg font-semibold">${producto.nombre}</h3>
+      <p class="text-gray-600 dark:text-gray-300">${formatoPrecio(producto.precio)}</p>
+    `;
 
-  btn.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    const esOscuro = document.body.classList.contains("dark");
-    btn.textContent = esOscuro ? textos[idiomaActual].btnModoClaro : textos[idiomaActual].btnModoOscuro;
-    localStorage.setItem("tema", esOscuro ? "dark" : "light");
+    card.addEventListener("click", () => abrirModal(producto));
+    grid.appendChild(card);
   });
 }
 
-// Modal y slider de imágenes
-const modal = document.getElementById("modal");
-const modalImg = document.getElementById("modal-img");
-const modalNombre = document.getElementById("modal-nombre");
-const modalDescripcion = document.getElementById("modal-descripcion");
-const modalPrecio = document.getElementById("modal-precio");
-const modalClose = document.querySelector(".modal-close");
-const prevBtn = document.getElementById("prev-img");
-const nextBtn = document.getElementById("next-img");
+// 📌 Filtros
+function aplicarFiltros() {
+  const busqueda = searchInput.value.toLowerCase();
+  const categoria = categoriaFiltro.value;
+  const precioMin = parseFloat(precioMinInput.value) || 0;
+  const precioMax = parseFloat(precioMaxInput.value) || Infinity;
+  const orden = ordenarSelect.value;
 
-let imagenActual = 0;
-let imagenesProducto = [];
+  productosFiltrados = productos.filter((p) => {
+    return (
+      (p.nombre.toLowerCase().includes(busqueda) ||
+        p.descripcion.toLowerCase().includes(busqueda)) &&
+      (categoria === "todas" || p.categoria === categoria) &&
+      p.precio >= precioMin &&
+      p.precio <= precioMax
+    );
+  });
 
-function abrirModal(prod) {
-  modal.classList.remove("hidden");
-  imagenesProducto = prod.imagenes || [];
-  imagenActual = 0;
-  actualizarImagen();
-  modalNombre.textContent = prod.nombre;
-  modalDescripcion.textContent = prod.descripcion || "";
-  modalPrecio.textContent = formatoPrecio(prod.precio);
+  if (orden === "nombreAsc") productosFiltrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
+  if (orden === "nombreDesc") productosFiltrados.sort((a, b) => b.nombre.localeCompare(a.nombre));
+  if (orden === "precioAsc") productosFiltrados.sort((a, b) => a.precio - b.precio);
+  if (orden === "precioDesc") productosFiltrados.sort((a, b) => b.precio - a.precio);
+
+  mostrarProductos();
 }
 
-function actualizarImagen() {
-  if (imagenesProducto.length) {
-    modalImg.src = `img/${imagenesProducto[imagenActual]}`;
+// 📌 Modal
+function abrirModal(producto) {
+  modal.classList.remove("hidden");
+  let currentImage = 0;
+
+  function renderImagen() {
+    modalBody.innerHTML = `
+      <h2 class="text-2xl font-bold mb-2">${producto.nombre}</h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-4">${formatoPrecio(producto.precio)}</p>
+      <p class="mb-4">${producto.descripcion}</p>
+      <div class="flex items-center justify-center">
+        <button id="prevImg" class="px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded-l">◀</button>
+        <img src="${producto.imagenes[currentImage]}" class="max-h-80 mx-2 rounded-lg shadow">
+        <button id="nextImg" class="px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded-r">▶</button>
+      </div>
+    `;
+
+    document.getElementById("prevImg").onclick = () => {
+      currentImage = (currentImage - 1 + producto.imagenes.length) % producto.imagenes.length;
+      renderImagen();
+    };
+    document.getElementById("nextImg").onclick = () => {
+      currentImage = (currentImage + 1) % producto.imagenes.length;
+      renderImagen();
+    };
   }
+
+  renderImagen();
 }
 
 modalClose.addEventListener("click", () => modal.classList.add("hidden"));
-modal.addEventListener("click", e => {
+window.addEventListener("click", (e) => {
   if (e.target === modal) modal.classList.add("hidden");
 });
 
-prevBtn.addEventListener("click", e => {
-  e.stopPropagation();
-  if (!imagenesProducto.length) return;
-  imagenActual = (imagenActual - 1 + imagenesProducto.length) % imagenesProducto.length;
-  actualizarImagen();
-});
-
-nextBtn.addEventListener("click", e => {
-  e.stopPropagation();
-  if (!imagenesProducto.length) return;
-  imagenActual = (imagenActual + 1) % imagenesProducto.length;
-  actualizarImagen();
-});
-
-// Traducción
-const textos = {
-  es: {
-    buscadorPlaceholder: "Buscar productos...",
-    filtroCategoria: "Categoría:",
-    filtroTipo: "Tipo:",
-    filtroEstado: "Estado:",
-    filtroMin: "Precio mín:",
-    filtroMax: "Precio máx:",
-    filtroOrden: "Ordenar por:",
-    vacio: "No hay productos que coincidan con la búsqueda.",
-    btnModoClaro: "☀️ Modo claro",
-    btnModoOscuro: "🌙 Modo oscuro"
-  },
-  en: {
-    buscadorPlaceholder: "Search products...",
-    filtroCategoria: "Category:",
-    filtroTipo: "Type:",
-    filtroEstado: "State:",
-    filtroMin: "Min price:",
-    filtroMax: "Max price:",
-    filtroOrden: "Sort by:",
-    vacio: "No products match the search.",
-    btnModoClaro: "☀️ Light mode",
-    btnModoOscuro: "🌙 Dark mode"
-  }
-};
-
-let idiomaActual = "es";
-
-function cambiarIdioma(lang) {
-  idiomaActual = lang;
-
-  // placeholder buscador
-  const buscador = document.getElementById("buscador");
-  if (buscador) buscador.placeholder = textos[idiomaActual].buscadorPlaceholder;
-
-  // labels filtros
-  document.querySelectorAll("[data-texto]").forEach(el => {
-    const key = el.dataset.texto;
-    if (textos[idiomaActual][key]) {
-      const span = el.querySelector("span");
-      if(span){
-        span.textContent = textos[idiomaActual][key];
-      } else {
-        el.childNodes[0].textContent = textos[idiomaActual][key] + " ";
-      }
-    }
+// 📌 Cargar categorías dinámicamente
+function cargarCategorias() {
+  const categorias = [...new Set(productos.map((p) => p.categoria))];
+  categoriaFiltro.innerHTML = `<option value="todas">${traducciones[idioma].todas}</option>`;
+  categorias.forEach((cat) => {
+    const option = document.createElement("option");
+    option.value = cat;
+    option.textContent = cat;
+    categoriaFiltro.appendChild(option);
   });
-
-  // mensaje vacío
-  const emptyDiv = document.querySelector(".empty");
-  if (emptyDiv) emptyDiv.textContent = textos[idiomaActual].vacio;
-
-  // botón de tema
-  const btn = document.getElementById("btn-tema");
-  if (btn) {
-    const esOscuro = document.body.classList.contains("dark");
-    btn.textContent = esOscuro ? textos[idiomaActual].btnModoClaro : textos[idiomaActual].btnModoOscuro;
-  }
-
-  // marcar botón activo
-  document.querySelectorAll(".lang-toggle button").forEach(b => b.classList.remove("active"));
-  const btnActivo = document.querySelector(`.lang-toggle button[onclick="cambiarIdioma('${idiomaActual}')"]`);
-  if (btnActivo) btnActivo.classList.add("active");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    cargarProductos().then(initTema);
-    cambiarIdioma(idiomaActual);
-  });
+// 📌 Traducción de la UI
+function aplicarTraduccion() {
+  document.getElementById("titulo").textContent = traducciones[idioma].titulo;
+  searchInput.placeholder = traducciones[idioma].buscar;
+  document.querySelector("label[for='categoriaFiltro']").textContent = traducciones[idioma].categoria;
+  document.querySelector("label[for='precioMin']").textContent = traducciones[idioma].precioMin;
+  document.querySelector("label[for='precioMax']").textContent = traducciones[idioma].precioMax;
+  document.querySelector("label[for='ordenarSelect']").textContent = traducciones[idioma].ordenar;
+
+  ordenarSelect.innerHTML = `
+    <option value="nombreAsc">${traducciones[idioma].nombreAsc}</option>
+    <option value="nombreDesc">${traducciones[idioma].nombreDesc}</option>
+    <option value="precioAsc">${traducciones[idioma].precioAsc}</option>
+    <option value="precioDesc">${traducciones[idioma].precioDesc}</option>
+  `;
+}
+
+// 📌 Cambiar idioma
+toggleLang.addEventListener("click", () => {
+  idioma = idioma === "es" ? "en" : "es";
+  localStorage.setItem("idioma", idioma);
+  aplicarTraduccion();
+  cargarCategorias();
+  mostrarProductos();
+});
+
+// 📌 Tema oscuro
+function aplicarTema() {
+  document.documentElement.classList.toggle("dark", temaOscuro);
+}
+toggleTema.addEventListener("click", () => {
+  temaOscuro = !temaOscuro;
+  localStorage.setItem("temaOscuro", temaOscuro);
+  aplicarTema();
+});
+
+// 📌 Eventos
+searchInput.addEventListener("input", aplicarFiltros);
+categoriaFiltro.addEventListener("change", aplicarFiltros);
+precioMinInput.addEventListener("input", aplicarFiltros);
+precioMaxInput.addEventListener("input", aplicarFiltros);
+ordenarSelect.addEventListener("change", aplicarFiltros);
+
+// 📌 Inicialización
+aplicarTema();
+aplicarTraduccion();
+cargarProductos();
