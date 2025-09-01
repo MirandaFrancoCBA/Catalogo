@@ -18,7 +18,6 @@ let idioma = localStorage.getItem("idioma") || "es";
 let temaOscuro = localStorage.getItem("temaOscuro") === "true";
 
 // ✅ ID de tu Google Sheet
-const sheetId = "TU_SHEET_ID"; 
 const sheetUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vRipqgWxJuDRNca219T0SG4e1AM3cwJVix1xgd05gKXXhzOmpnL3KmrUExSXIE7Lpvo2tGvRmywR-w3/pub?output=csv`;
 
 // 📌 Traducciones
@@ -215,8 +214,9 @@ toggleLang.addEventListener("click", () => {
 
 // 📌 Tema oscuro
 function aplicarTema() {
-  document.documentElement.classList.toggle("dark", temaOscuro);
-}
+    document.body.classList.toggle("dark", temaOscuro);
+  }
+  
 toggleTema.addEventListener("click", () => {
   temaOscuro = !temaOscuro;
   localStorage.setItem("temaOscuro", temaOscuro);
