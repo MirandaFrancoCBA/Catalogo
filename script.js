@@ -30,7 +30,7 @@ function renderProductos(lista) {
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
-      <img src="img/${prod.imagenes[0]}" alt="${prod.nombre}" class="card-img">
+      <img loading="lazy" src="img/${prod.imagenes[0]}" alt="${prod.nombre}" class="card-img">
       <div class="card-body">
         <h3 class="card-title">${prod.nombre}</h3>
         <p class="card-desc">${prod.descripcion || ""}</p>
@@ -92,6 +92,9 @@ function initFiltros() {
 
 // Cargar productos JSON y rellenar select
 async function cargarProductos() {
+  const contenedor = document.getElementById("catalogo");
+  contenedor.innerHTML = "<p class='empty'>Cargando productos...</p>";
+
   try {
     const res = await fetch("data/productos.json");
     productosOriginales = await res.json();
@@ -160,6 +163,28 @@ function abrirModal(prod) {
   modalNombre.textContent = prod.nombre;
   modalDescripcion.textContent = prod.descripcion || "";
   modalPrecio.textContent = formatoPrecio(prod.precio);
+
+  const mensaje = `Hola! Me interesa este producto: ${prod.nombre} (${formatoPrecio(prod.precio)})`;
+const link = `https://wa.me/5493804682803?text=${encodeURIComponent(mensaje)}`;
+
+let btn = document.getElementById("btn-consultar");
+
+if (!btn) {
+  btn = document.createElement("a");
+  btn.id = "btn-consultar";
+  btn.target = "_blank";
+  btn.style.display = "inline-block";
+  btn.style.marginTop = "10px";
+  btn.style.padding = "10px";
+  btn.style.background = "#25D366";
+  btn.style.color = "white";
+  btn.style.borderRadius = "8px";
+  btn.style.textDecoration = "none";
+  btn.innerText = "Consultar por WhatsApp";
+  document.querySelector(".modal-content").appendChild(btn);
+}
+
+btn.href = link;
 }
 
 function actualizarImagen() {

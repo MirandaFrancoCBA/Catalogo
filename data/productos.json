@@ -7,8 +7,8 @@
     "estado": "crudo",
     "precio": 2500,
     "imagenes": [
-      "img/ceramica/maceta_pequena_crudo_1.jpg",
-      "img/ceramica/maceta_pequena_crudo_2.jpg"
+      "ceramica/maceta_pequena_crudo_1.jpg",
+      "ceramica/maceta_pequena_crudo_2.jpg"
     ],
     "descripcion": "Maceta de cerámica pequeña, ideal para cactus o suculentas. Terminación en crudo lista para pintar."
   },
@@ -20,8 +20,8 @@
     "estado": "pintado",
     "precio": 4000,
     "imagenes": [
-      "img/ceramica/maceta_mediana_verde_1.jpg",
-      "img/ceramica/maceta_mediana_verde_2.jpg"
+      "ceramica/maceta_mediana_verde_1.jpg",
+      "ceramica/maceta_mediana_verde_2.jpg"
     ],
     "descripcion": "Maceta de cerámica mediana pintada en verde, resistente y elegante."
   },
@@ -33,7 +33,7 @@
     "estado": "crudo",
     "precio": 6000,
     "imagenes": [
-      "img/ceramica/maceta_grande_rustica_1.jpg"
+      "ceramica/maceta_grande_rustica_1.jpg"
     ],
     "descripcion": "Maceta de cerámica de gran tamaño, estilo rústico para patios o jardines."
   },
@@ -45,7 +45,7 @@
     "estado": "pintado",
     "precio": 5500,
     "imagenes": [
-      "img/ceramica/jarron_rojo_1.jpg"
+      "ceramica/jarron_rojo_1.jpg"
     ],
     "descripcion": "Jarrón de cerámica pintado en rojo, ideal para decoración interior."
   },
@@ -57,7 +57,7 @@
     "estado": "pintado",
     "precio": 3500,
     "imagenes": [
-      "img/ceramica/figura_buho_1.jpg"
+      "ceramica/figura_buho_1.jpg"
     ],
     "descripcion": "Figura artesanal en forma de búho hecha en cerámica pintada a mano."
   },
@@ -69,7 +69,7 @@
     "estado": "crudo",
     "precio": 4800,
     "imagenes": [
-      "img/ceramica/set_mini_macetas_1.jpg"
+      "ceramica/set_mini_macetas_1.jpg"
     ],
     "descripcion": "Conjunto de tres macetas pequeñas de cerámica, perfectas para suculentas."
   },
@@ -81,7 +81,7 @@
     "estado": "crudo",
     "precio": 2800,
     "imagenes": [
-      "img/cemento/maceta_cuadrada_chica_1.jpg"
+      "cemento/maceta_cuadrada_chica_1.jpg"
     ],
     "descripcion": "Maceta cuadrada de cemento chica, resistente al exterior."
   },
@@ -93,7 +93,7 @@
     "estado": "pintado",
     "precio": 4200,
     "imagenes": [
-      "img/cemento/maceta_cilindrica_mediana_1.jpg"
+      "cemento/maceta_cilindrica_mediana_1.jpg"
     ],
     "descripcion": "Maceta cilíndrica de cemento pintada, estilo minimalista."
   },
@@ -105,7 +105,7 @@
     "estado": "crudo",
     "precio": 7500,
     "imagenes": [
-      "img/cemento/maceta_rectangular_grande_1.jpg"
+      "cemento/maceta_rectangular_grande_1.jpg"
     ],
     "descripcion": "Maceta rectangular de cemento, ideal para balcones y patios."
   },
@@ -117,7 +117,7 @@
     "estado": "crudo",
     "precio": 5200,
     "imagenes": [
-      "img/cemento/jarron_rustico_1.jpg"
+      "cemento/jarron_rustico_1.jpg"
     ],
     "descripcion": "Jarrón de cemento estilo rústico, fuerte y duradero."
   },
@@ -129,7 +129,7 @@
     "estado": "pintado",
     "precio": 3900,
     "imagenes": [
-      "img/cemento/figura_rana_1.jpg"
+      "cemento/figura_rana_1.jpg"
     ],
     "descripcion": "Figura de rana de cemento pintada, ideal para decorar el jardín."
   },
@@ -141,7 +141,7 @@
     "estado": "crudo",
     "precio": 3500,
     "imagenes": [
-      "img/cemento/maceta_colgante_1.jpg"
+      "cemento/maceta_colgante_1.jpg"
     ],
     "descripcion": "Maceta de cemento colgante con diseño moderno."
   },
@@ -153,7 +153,7 @@
     "estado": "crudo",
     "precio": 7000,
     "imagenes": [
-      "img/otros/olla_barro_chica_1.jpg"
+      "otros/olla_barro_chica_1.jpg"
     ],
     "descripcion": "Olla de barro chica apta para horno y fuego directo."
   },
@@ -165,7 +165,7 @@
     "estado": "crudo",
     "precio": 6500,
     "imagenes": [
-      "img/otros/cazuela_barro_mediana_1.jpg"
+      "otros/cazuela_barro_mediana_1.jpg"
     ],
     "descripcion": "Cazuela de barro mediana para guisos y comidas tradicionales."
   },
@@ -177,7 +177,7 @@
     "estado": "crudo",
     "precio": 12000,
     "imagenes": [
-      "img/otros/fuente_mediana_1.jpg"
+      "otros/fuente_mediana_1.jpg"
     ],
     "descripcion": "Fuente de agua artesanal, perfecta para jardines."
   },
@@ -189,7 +189,7 @@
     "estado": "crudo",
     "precio": 9500,
     "imagenes": [
-      "img/otros/olla_barro_grande_1.jpg"
+      "otros/olla_barro_grande_1.jpg"
     ],
     "descripcion": "Olla de barro grande para cocinar al fuego lento."
   },
@@ -201,7 +201,7 @@
     "estado": "pintado",
     "precio": 6800,
     "imagenes": [
-      "img/otros/cazuela_pintada_1.jpg"
+      "otros/cazuela_pintada_1.jpg"
     ],
     "descripcion": "Cazuela chica pintada con diseño artesanal."
   },
@@ -213,7 +213,7 @@
     "estado": "crudo",
     "precio": 15000,
     "imagenes": [
-      "img/otros/fuente_grande_1.jpg"
+      "otros/fuente_grande_1.jpg"
     ],
     "descripcion": "Fuente de agua grande para patios amplios o galerías."
   }
