@@ -1,220 +1,181 @@
 [
   {
     "id": 1,
-    "nombre": "Maceta pequeña clásica",
-    "categoria": "cerámica",
-    "tipo": "maceta",
+    "nombre": "Maceta Ollita",
+    "categoria": "macetas",
+    "tipo": "ollita",
     "estado": "crudo",
-    "precio": 2500,
-    "imagenes": [
-      "ceramica/maceta_pequena_crudo_1.jpg",
-      "ceramica/maceta_pequena_crudo_2.jpg"
-    ],
-    "descripcion": "Maceta de cerámica pequeña, ideal para cactus o suculentas. Terminación en crudo lista para pintar."
+    "tamano": 15,
+    "precio": 3200,
+    "imagenes": ["ceramica/maceta_ollita_15.jpg"],
+    "descripcion": "Maceta modelo ollita, ideal para suculentas."
   },
   {
     "id": 2,
-    "nombre": "Maceta mediana pintada verde",
-    "categoria": "cerámica",
-    "tipo": "maceta",
+    "nombre": "Maceta Ollita",
+    "categoria": "macetas",
+    "tipo": "ollita",
     "estado": "pintado",
-    "precio": 4000,
-    "imagenes": [
-      "ceramica/maceta_mediana_verde_1.jpg",
-      "ceramica/maceta_mediana_verde_2.jpg"
-    ],
-    "descripcion": "Maceta de cerámica mediana pintada en verde, resistente y elegante."
+    "tamano": 15,
+    "precio": 6500,
+    "imagenes": ["ceramica/maceta_ollita_15_pintada.jpg"],
+    "descripcion": "Maceta modelo ollita pintada artesanalmente."
   },
+
   {
     "id": 3,
-    "nombre": "Maceta grande rustica",
-    "categoria": "cerámica",
-    "tipo": "maceta",
+    "nombre": "Maceta Cónica",
+    "categoria": "macetas",
+    "tipo": "conica",
     "estado": "crudo",
-    "precio": 6000,
-    "imagenes": [
-      "ceramica/maceta_grande_rustica_1.jpg"
-    ],
-    "descripcion": "Maceta de cerámica de gran tamaño, estilo rústico para patios o jardines."
+    "tamano": 20,
+    "precio": 5000,
+    "imagenes": ["ceramica/maceta_conica_20.jpg"],
+    "descripcion": "Maceta cónica de cerámica."
   },
   {
     "id": 4,
-    "nombre": "Jarrón artesanal pintado rojo",
-    "categoria": "cerámica",
-    "tipo": "jarrón",
+    "nombre": "Maceta Cónica",
+    "categoria": "macetas",
+    "tipo": "conica",
     "estado": "pintado",
-    "precio": 5500,
-    "imagenes": [
-      "ceramica/jarron_rojo_1.jpg"
-    ],
-    "descripcion": "Jarrón de cerámica pintado en rojo, ideal para decoración interior."
+    "tamano": 20,
+    "precio": 10000,
+    "imagenes": ["ceramica/maceta_conica_20_pintada.jpg"],
+    "descripcion": "Maceta cónica pintada."
   },
+
   {
     "id": 5,
-    "nombre": "Figura decorativa búho",
-    "categoria": "cerámica",
-    "tipo": "figura",
-    "estado": "pintado",
-    "precio": 3500,
-    "imagenes": [
-      "ceramica/figura_buho_1.jpg"
-    ],
-    "descripcion": "Figura artesanal en forma de búho hecha en cerámica pintada a mano."
+    "nombre": "Maceta Media Bocha",
+    "categoria": "macetas",
+    "tipo": "media_bocha",
+    "estado": "crudo",
+    "tamano": 25,
+    "precio": 7500,
+    "imagenes": ["ceramica/maceta_bocha_25.jpg"],
+    "descripcion": "Maceta media bocha, diseño moderno."
   },
   {
     "id": 6,
-    "nombre": "Juego de 3 macetas mini",
-    "categoria": "cerámica",
-    "tipo": "maceta",
-    "estado": "crudo",
-    "precio": 4800,
-    "imagenes": [
-      "ceramica/set_mini_macetas_1.jpg"
-    ],
-    "descripcion": "Conjunto de tres macetas pequeñas de cerámica, perfectas para suculentas."
+    "nombre": "Maceta Media Bocha",
+    "categoria": "macetas",
+    "tipo": "media_bocha",
+    "estado": "pintado",
+    "tamano": 25,
+    "precio": 15000,
+    "imagenes": ["ceramica/maceta_bocha_25_pintada.jpg"],
+    "descripcion": "Maceta media bocha pintada."
   },
+
   {
     "id": 7,
-    "nombre": "Maceta de cemento cuadrada chica",
-    "categoria": "cemento",
-    "tipo": "maceta",
+    "nombre": "Maceta Holandesa",
+    "categoria": "macetas",
+    "tipo": "holandesa",
     "estado": "crudo",
-    "precio": 2800,
-    "imagenes": [
-      "cemento/maceta_cuadrada_chica_1.jpg"
-    ],
-    "descripcion": "Maceta cuadrada de cemento chica, resistente al exterior."
+    "tamano": 30,
+    "precio": 10000,
+    "imagenes": ["ceramica/maceta_holandesa_30.jpg"],
+    "descripcion": "Maceta estilo holandesa."
   },
   {
     "id": 8,
-    "nombre": "Maceta de cemento cilíndrica mediana",
-    "categoria": "cemento",
-    "tipo": "maceta",
+    "nombre": "Maceta Holandesa",
+    "categoria": "macetas",
+    "tipo": "holandesa",
     "estado": "pintado",
-    "precio": 4200,
-    "imagenes": [
-      "cemento/maceta_cilindrica_mediana_1.jpg"
-    ],
-    "descripcion": "Maceta cilíndrica de cemento pintada, estilo minimalista."
+    "tamano": 30,
+    "precio": 25000,
+    "imagenes": ["ceramica/maceta_holandesa_30_pintada.jpg"],
+    "descripcion": "Maceta holandesa pintada."
   },
+
   {
     "id": 9,
-    "nombre": "Maceta rectangular grande",
-    "categoria": "cemento",
-    "tipo": "maceta",
+    "nombre": "Maceta Cilindro",
+    "categoria": "macetas",
+    "tipo": "cilindro",
     "estado": "crudo",
-    "precio": 7500,
-    "imagenes": [
-      "cemento/maceta_rectangular_grande_1.jpg"
-    ],
-    "descripcion": "Maceta rectangular de cemento, ideal para balcones y patios."
+    "tamano": 35,
+    "precio": 12000,
+    "imagenes": ["ceramica/maceta_cilindro_35.jpg"],
+    "descripcion": "Maceta cilíndrica de cerámica."
   },
   {
     "id": 10,
-    "nombre": "Jarrón de cemento rústico",
-    "categoria": "cemento",
-    "tipo": "jarrón",
-    "estado": "crudo",
-    "precio": 5200,
-    "imagenes": [
-      "cemento/jarron_rustico_1.jpg"
-    ],
-    "descripcion": "Jarrón de cemento estilo rústico, fuerte y duradero."
-  },
-  {
-    "id": 11,
-    "nombre": "Figura de jardín rana",
-    "categoria": "cemento",
-    "tipo": "figura",
+    "nombre": "Maceta Cilindro",
+    "categoria": "macetas",
+    "tipo": "cilindro",
     "estado": "pintado",
-    "precio": 3900,
-    "imagenes": [
-      "cemento/figura_rana_1.jpg"
-    ],
-    "descripcion": "Figura de rana de cemento pintada, ideal para decorar el jardín."
+    "tamano": 35,
+    "precio": 30000,
+    "imagenes": ["ceramica/maceta_cilindro_35_pintada.jpg"],
+    "descripcion": "Maceta cilíndrica pintada."
+  },
+
+  {
+    "id": 20,
+    "nombre": "Florero",
+    "categoria": "floreros",
+    "tipo": "clasico",
+    "estado": "crudo",
+    "tamano": 40,
+    "precio": 6000,
+    "imagenes": ["ceramica/florero_40.jpg"],
+    "descripcion": "Florero de cerámica."
   },
   {
-    "id": 12,
-    "nombre": "Maceta colgante cemento",
-    "categoria": "cemento",
-    "tipo": "maceta",
-    "estado": "crudo",
-    "precio": 3500,
-    "imagenes": [
-      "cemento/maceta_colgante_1.jpg"
-    ],
-    "descripcion": "Maceta de cemento colgante con diseño moderno."
-  },
-  {
-    "id": 13,
-    "nombre": "Olla de barro chica",
-    "categoria": "varios",
-    "tipo": "olla",
-    "estado": "crudo",
-    "precio": 7000,
-    "imagenes": [
-      "otros/olla_barro_chica_1.jpg"
-    ],
-    "descripcion": "Olla de barro chica apta para horno y fuego directo."
-  },
-  {
-    "id": 14,
-    "nombre": "Cazuela de barro mediana",
-    "categoria": "varios",
-    "tipo": "cazuela",
-    "estado": "crudo",
-    "precio": 6500,
-    "imagenes": [
-      "otros/cazuela_barro_mediana_1.jpg"
-    ],
-    "descripcion": "Cazuela de barro mediana para guisos y comidas tradicionales."
-  },
-  {
-    "id": 15,
-    "nombre": "Fuente de agua mediana",
-    "categoria": "varios",
-    "tipo": "fuente",
-    "estado": "crudo",
+    "id": 21,
+    "nombre": "Florero",
+    "categoria": "floreros",
+    "tipo": "clasico",
+    "estado": "pintado",
+    "tamano": 40,
     "precio": 12000,
-    "imagenes": [
-      "otros/fuente_mediana_1.jpg"
-    ],
-    "descripcion": "Fuente de agua artesanal, perfecta para jardines."
+    "imagenes": ["ceramica/florero_40_pintado.jpg"],
+    "descripcion": "Florero pintado."
   },
+
   {
-    "id": 16,
-    "nombre": "Olla de barro grande",
-    "categoria": "varios",
-    "tipo": "olla",
+    "id": 30,
+    "nombre": "Fuente Cuadrada Simple",
+    "categoria": "fuentes",
+    "tipo": "cuadrada",
     "estado": "crudo",
-    "precio": 9500,
-    "imagenes": [
-      "otros/olla_barro_grande_1.jpg"
-    ],
-    "descripcion": "Olla de barro grande para cocinar al fuego lento."
+    "precio": 25000,
+    "imagenes": ["otros/fuente_cuadrada.jpg"],
+    "descripcion": "Fuente de agua cuadrada simple."
   },
   {
-    "id": 17,
-    "nombre": "Cazuela de barro chica pintada",
-    "categoria": "varios",
-    "tipo": "cazuela",
+    "id": 31,
+    "nombre": "Fuente Cuadrada con Negra",
+    "categoria": "fuentes",
+    "tipo": "cuadrada",
     "estado": "pintado",
-    "precio": 6800,
-    "imagenes": [
-      "otros/cazuela_pintada_1.jpg"
-    ],
-    "descripcion": "Cazuela chica pintada con diseño artesanal."
+    "precio": 30000,
+    "imagenes": ["otros/fuente_cuadrada_negra.jpg"],
+    "descripcion": "Fuente cuadrada con detalle en negro."
+  },
+
+  {
+    "id": 40,
+    "nombre": "Figura Sol",
+    "categoria": "figuras_yeso",
+    "tipo": "decorativa",
+    "estado": "crudo",
+    "precio": 3000,
+    "imagenes": ["yeso/sol.jpg"],
+    "descripcion": "Figura de yeso decorativa."
   },
   {
-    "id": 18,
-    "nombre": "Fuente de agua grande",
-    "categoria": "varios",
-    "tipo": "fuente",
-    "estado": "crudo",
-    "precio": 15000,
-    "imagenes": [
-      "otros/fuente_grande_1.jpg"
-    ],
-    "descripcion": "Fuente de agua grande para patios amplios o galerías."
+    "id": 41,
+    "nombre": "Figura Sol",
+    "categoria": "figuras_yeso",
+    "tipo": "decorativa",
+    "estado": "pintado",
+    "precio": 6000,
+    "imagenes": ["yeso/sol_pintado.jpg"],
+    "descripcion": "Figura de yeso pintada."
   }
 ]
