@@ -4,7 +4,7 @@
     "nombre": "Maceta Ollita",
     "categoria": "macetas",
     "tipo": "ollita",
-    "imagenes": ["ceramica/maceta_ollita.jpg"],
+    "imagenes": ["ceramica/ollita.jpeg","ceramica/pintada1.jpeg"],
     "descripcion": "Maceta modelo ollita.",
     "variantes": [
       { "tamano": 15, "crudo": 3200, "pintado": 6500 },
