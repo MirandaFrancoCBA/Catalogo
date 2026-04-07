@@ -159,5 +159,23 @@
       { "nombre": "Crudo", "precio": 3000 },
       { "nombre": "Pintado", "precio": 6000 }
     ]
+  },
+
+  {
+    "id": 32,
+    "nombre": "Figura Negra Africana",
+    "categoria": "figuras_yeso",
+    "tipo": "decorativa",
+    "imagenes": ["yeso/negra.jpg"],
+    "descripcion": "Figura decorativa africana de yeso.",
+    "variantes": [
+      { "nombre": "Sentada", "precio": 9000 },
+      { "nombre": "Sentada Pintada", "precio": 18000 },
+      { "nombre": "Pared chica", "precio": 3000 },
+      { "nombre": "Pared chica pintada", "precio": 6000 },
+      { "nombre": "Pared grande", "precio": 4000 },
+      { "nombre": "Pared grande pintada", "precio": 8000 },
+      { "nombre": "Cuadro pintado", "precio": 20000 }
+    ]
   }
 ]

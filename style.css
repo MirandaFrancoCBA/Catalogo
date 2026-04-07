@@ -1,15 +1,14 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f8f9fa;
-    color: #333;
-  }
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #f4f1ee; /* beige suave */
+  color: #3e3e3e;
+}
   
   header {
     text-align: center;
     padding: 2rem;
-    background: #2e7d32;
-    color: white;
+    background: #6d4c41; /* marrón arcilla */
+    color: #f5f5f5;
   }
   
   .grid {
@@ -20,15 +19,15 @@ body {
   }
   
   .card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    overflow: hidden;
-    transition: transform 0.2s;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   
   .card:hover {
-    transform: scale(1.03);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
   }
   .card {
     background: white;
@@ -63,11 +62,36 @@ body {
   .card-body p {
     margin: 0.2rem 0;
   }
+
+  .card-price {
+    font-size: 1.2rem;
+    color: #8d6e63; /* tono cerámica */
+    font-weight: bold;
+  }
   
   footer {
+    background: #5d4037;
+    color: #f5f5f5;
+    padding: 2rem 1rem;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  .footer-container h4 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-copy {
     text-align: center;
-    padding: 1rem;
-    background: #e0e0e0;
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
   }
 
   /* Barra de búsqueda */
@@ -85,10 +109,15 @@ body {
     border-radius: 12px;
     outline: none;
   }
+
+  #buscador {
+    border: 1px solid #d7ccc8;
+    background: white;
+  }
   
   #buscador:focus {
-    border-color: #2e7d32;
-    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+    border-color: #8d6e63;
+    box-shadow: 0 0 0 3px rgba(141,110,99,0.2);
   }
   
   /* Mensaje de vacíos */
@@ -139,17 +168,13 @@ body {
     margin-top: 1rem;
   }
   
-  .theme-toggle button {
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    background: white;
-    color: #2e7d32;
-    font-weight: bold;
-    transition: background 0.3s, color 0.3s;
+  .theme-toggle button,
+  .lang-toggle button {
+    background: #fff;
+    color: #6d4c41;
+    border: 1px solid #d7ccc8;
   }
+  
   
   .theme-toggle button:hover {
     background: #e0e0e0;
@@ -157,12 +182,12 @@ body {
   
   /* 🌙 Dark mode */
   body.dark {
-    background: #121212;
-    color: #eee;
+    background: #1c1c1c;
+    color: #e0e0e0;
   }
   
   body.dark header {
-    background: #1b5e20;
+    background: #3e2723;
   }
   
   body.dark footer {
@@ -171,7 +196,7 @@ body {
   }
   
   body.dark .card {
-    background: #1f1f1f;
+    background: #222;
     color: #eee;
     box-shadow: 0 2px 6px rgba(255,255,255,0.1);
   }
@@ -422,9 +447,8 @@ body {
   }
   
   .lang-toggle button.active {
-    background: #2e7d32;
+    background: #6d4c41;
     color: white;
-    border-color: #2e7d32;
   }
 
   
@@ -438,4 +462,22 @@ body {
   .card.show {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  @media (max-width: 600px) {
+    header {
+      padding: 1.5rem 1rem;
+    }
+  
+    .grid {
+      padding: 1rem;
+    }
+  
+    .card img {
+      height: 150px;
+    }
+  
+    .filtros {
+      padding: 1rem;
+    }
   }
