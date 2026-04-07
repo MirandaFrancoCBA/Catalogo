@@ -4,178 +4,160 @@
     "nombre": "Maceta Ollita",
     "categoria": "macetas",
     "tipo": "ollita",
-    "estado": "crudo",
-    "tamano": 15,
-    "precio": 3200,
-    "imagenes": ["ceramica/maceta_ollita_15.jpg"],
-    "descripcion": "Maceta modelo ollita, ideal para suculentas."
+    "imagenes": ["ceramica/maceta_ollita.jpg"],
+    "descripcion": "Maceta modelo ollita.",
+    "variantes": [
+      { "tamano": 15, "crudo": 3200, "pintado": 6500 },
+      { "tamano": 20, "crudo": 5000, "pintado": 10000 },
+      { "tamano": 25, "crudo": 7500, "pintado": 15000 },
+      { "tamano": 30, "crudo": 10000, "pintado": 25000 },
+      { "tamano": 35, "crudo": 12000, "pintado": 30000 },
+      { "tamano": 40, "crudo": 15000, "pintado": 35000 },
+      { "tamano": 45, "crudo": 20000, "pintado": 40000 }
+    ]
   },
   {
     "id": 2,
-    "nombre": "Maceta Ollita",
-    "categoria": "macetas",
-    "tipo": "ollita",
-    "estado": "pintado",
-    "tamano": 15,
-    "precio": 6500,
-    "imagenes": ["ceramica/maceta_ollita_15_pintada.jpg"],
-    "descripcion": "Maceta modelo ollita pintada artesanalmente."
-  },
-
-  {
-    "id": 3,
     "nombre": "Maceta Cónica",
     "categoria": "macetas",
     "tipo": "conica",
-    "estado": "crudo",
-    "tamano": 20,
-    "precio": 5000,
-    "imagenes": ["ceramica/maceta_conica_20.jpg"],
-    "descripcion": "Maceta cónica de cerámica."
+    "imagenes": ["ceramica/maceta_conica.jpg"],
+    "descripcion": "Maceta cónica.",
+    "variantes": [
+      { "tamano": 15, "crudo": 3200, "pintado": 6500 },
+      { "tamano": 20, "crudo": 5000, "pintado": 10000 },
+      { "tamano": 25, "crudo": 7500, "pintado": 15000 },
+      { "tamano": 30, "crudo": 10000, "pintado": 25000 },
+      { "tamano": 35, "crudo": 12000, "pintado": 30000 },
+      { "tamano": 40, "crudo": 15000, "pintado": 35000 },
+      { "tamano": 45, "crudo": 20000, "pintado": 40000 }
+    ]
+  },
+  {
+    "id": 3,
+    "nombre": "Maceta Media Bocha",
+    "categoria": "macetas",
+    "tipo": "media_bocha",
+    "imagenes": ["ceramica/maceta_bocha.jpg"],
+    "descripcion": "Maceta media bocha.",
+    "variantes": [
+      { "tamano": 15, "crudo": 3200, "pintado": 6500 },
+      { "tamano": 20, "crudo": 5000, "pintado": 10000 },
+      { "tamano": 25, "crudo": 7500, "pintado": 15000 },
+      { "tamano": 30, "crudo": 10000, "pintado": 25000 },
+      { "tamano": 35, "crudo": 12000, "pintado": 30000 },
+      { "tamano": 40, "crudo": 15000, "pintado": 35000 },
+      { "tamano": 45, "crudo": 20000, "pintado": 40000 }
+    ]
   },
   {
     "id": 4,
-    "nombre": "Maceta Cónica",
+    "nombre": "Maceta Holandesa",
     "categoria": "macetas",
-    "tipo": "conica",
-    "estado": "pintado",
-    "tamano": 20,
-    "precio": 10000,
-    "imagenes": ["ceramica/maceta_conica_20_pintada.jpg"],
-    "descripcion": "Maceta cónica pintada."
+    "tipo": "holandesa",
+    "imagenes": ["ceramica/maceta_holandesa.jpg"],
+    "descripcion": "Maceta estilo holandesa.",
+    "variantes": [
+      { "tamano": 15, "crudo": 3200, "pintado": 6500 },
+      { "tamano": 20, "crudo": 5000, "pintado": 10000 },
+      { "tamano": 25, "crudo": 7500, "pintado": 15000 },
+      { "tamano": 30, "crudo": 10000, "pintado": 25000 },
+      { "tamano": 35, "crudo": 12000, "pintado": 30000 },
+      { "tamano": 40, "crudo": 15000, "pintado": 35000 },
+      { "tamano": 45, "crudo": 20000, "pintado": 40000 }
+    ]
   },
-
   {
     "id": 5,
-    "nombre": "Maceta Media Bocha",
-    "categoria": "macetas",
-    "tipo": "media_bocha",
-    "estado": "crudo",
-    "tamano": 25,
-    "precio": 7500,
-    "imagenes": ["ceramica/maceta_bocha_25.jpg"],
-    "descripcion": "Maceta media bocha, diseño moderno."
-  },
-  {
-    "id": 6,
-    "nombre": "Maceta Media Bocha",
-    "categoria": "macetas",
-    "tipo": "media_bocha",
-    "estado": "pintado",
-    "tamano": 25,
-    "precio": 15000,
-    "imagenes": ["ceramica/maceta_bocha_25_pintada.jpg"],
-    "descripcion": "Maceta media bocha pintada."
-  },
-
-  {
-    "id": 7,
-    "nombre": "Maceta Holandesa",
-    "categoria": "macetas",
-    "tipo": "holandesa",
-    "estado": "crudo",
-    "tamano": 30,
-    "precio": 10000,
-    "imagenes": ["ceramica/maceta_holandesa_30.jpg"],
-    "descripcion": "Maceta estilo holandesa."
-  },
-  {
-    "id": 8,
-    "nombre": "Maceta Holandesa",
-    "categoria": "macetas",
-    "tipo": "holandesa",
-    "estado": "pintado",
-    "tamano": 30,
-    "precio": 25000,
-    "imagenes": ["ceramica/maceta_holandesa_30_pintada.jpg"],
-    "descripcion": "Maceta holandesa pintada."
-  },
-
-  {
-    "id": 9,
     "nombre": "Maceta Cilindro",
     "categoria": "macetas",
     "tipo": "cilindro",
-    "estado": "crudo",
-    "tamano": 35,
-    "precio": 12000,
-    "imagenes": ["ceramica/maceta_cilindro_35.jpg"],
-    "descripcion": "Maceta cilíndrica de cerámica."
+    "imagenes": ["ceramica/maceta_cilindro.jpg"],
+    "descripcion": "Maceta cilíndrica.",
+    "variantes": [
+      { "tamano": 15, "crudo": 3200, "pintado": 6500 },
+      { "tamano": 20, "crudo": 5000, "pintado": 10000 },
+      { "tamano": 25, "crudo": 7500, "pintado": 15000 },
+      { "tamano": 30, "crudo": 10000, "pintado": 25000 },
+      { "tamano": 35, "crudo": 12000, "pintado": 30000 },
+      { "tamano": 40, "crudo": 15000, "pintado": 35000 },
+      { "tamano": 45, "crudo": 20000, "pintado": 40000 }
+    ]
   },
+
   {
     "id": 10,
-    "nombre": "Maceta Cilindro",
-    "categoria": "macetas",
-    "tipo": "cilindro",
-    "estado": "pintado",
-    "tamano": 35,
-    "precio": 30000,
-    "imagenes": ["ceramica/maceta_cilindro_35_pintada.jpg"],
-    "descripcion": "Maceta cilíndrica pintada."
+    "nombre": "Florero",
+    "categoria": "floreros",
+    "tipo": "clasico",
+    "imagenes": ["ceramica/florero.jpg"],
+    "descripcion": "Florero de cerámica.",
+    "variantes": [
+      { "tamano": 40, "crudo": 6000, "pintado": 12000 },
+      { "tamano": 50, "crudo": 10000, "pintado": 15000 },
+      { "tamano": 60, "crudo": 12000, "pintado": 20000 }
+    ]
   },
 
   {
     "id": 20,
-    "nombre": "Florero",
-    "categoria": "floreros",
-    "tipo": "clasico",
-    "estado": "crudo",
-    "tamano": 40,
-    "precio": 6000,
-    "imagenes": ["ceramica/florero_40.jpg"],
-    "descripcion": "Florero de cerámica."
+    "nombre": "Fuente Cuadrada",
+    "categoria": "fuentes",
+    "tipo": "cuadrada",
+    "imagenes": ["otros/fuente_cuadrada.jpg"],
+    "descripcion": "Fuente de agua cuadrada.",
+    "variantes": [
+      { "nombre": "Simple", "precio": 25000 },
+      { "nombre": "Con negra", "precio": 30000 }
+    ]
   },
   {
     "id": 21,
-    "nombre": "Florero",
-    "categoria": "floreros",
-    "tipo": "clasico",
-    "estado": "pintado",
-    "tamano": 40,
-    "precio": 12000,
-    "imagenes": ["ceramica/florero_40_pintado.jpg"],
-    "descripcion": "Florero pintado."
+    "nombre": "Fuente Plato",
+    "categoria": "fuentes",
+    "tipo": "plato",
+    "imagenes": ["otros/fuente_plato.jpg"],
+    "descripcion": "Fuente estilo plato.",
+    "variantes": [
+      { "nombre": "Cuarzo", "precio": 25000 },
+      { "nombre": "Con imagen", "precio": 35000 }
+    ]
+  },
+  {
+    "id": 22,
+    "nombre": "Fuente Groot",
+    "categoria": "fuentes",
+    "tipo": "groot",
+    "imagenes": ["otros/fuente_groot.jpg"],
+    "descripcion": "Fuente Groot.",
+    "variantes": [
+      { "nombre": "Chico", "precio": 40000 },
+      { "nombre": "Grande", "precio": 200000 }
+    ]
   },
 
   {
     "id": 30,
-    "nombre": "Fuente Cuadrada Simple",
-    "categoria": "fuentes",
-    "tipo": "cuadrada",
-    "estado": "crudo",
-    "precio": 25000,
-    "imagenes": ["otros/fuente_cuadrada.jpg"],
-    "descripcion": "Fuente de agua cuadrada simple."
+    "nombre": "Figura Sol",
+    "categoria": "figuras_yeso",
+    "tipo": "decorativa",
+    "imagenes": ["yeso/sol.jpg"],
+    "descripcion": "Figura de yeso.",
+    "variantes": [
+      { "nombre": "Crudo", "precio": 3000 },
+      { "nombre": "Pintado", "precio": 6000 }
+    ]
   },
   {
     "id": 31,
-    "nombre": "Fuente Cuadrada con Negra",
-    "categoria": "fuentes",
-    "tipo": "cuadrada",
-    "estado": "pintado",
-    "precio": 30000,
-    "imagenes": ["otros/fuente_cuadrada_negra.jpg"],
-    "descripcion": "Fuente cuadrada con detalle en negro."
-  },
-
-  {
-    "id": 40,
-    "nombre": "Figura Sol",
+    "nombre": "Figura Luna",
     "categoria": "figuras_yeso",
     "tipo": "decorativa",
-    "estado": "crudo",
-    "precio": 3000,
-    "imagenes": ["yeso/sol.jpg"],
-    "descripcion": "Figura de yeso decorativa."
-  },
-  {
-    "id": 41,
-    "nombre": "Figura Sol",
-    "categoria": "figuras_yeso",
-    "tipo": "decorativa",
-    "estado": "pintado",
-    "precio": 6000,
-    "imagenes": ["yeso/sol_pintado.jpg"],
-    "descripcion": "Figura de yeso pintada."
+    "imagenes": ["yeso/luna.jpg"],
+    "descripcion": "Figura de yeso.",
+    "variantes": [
+      { "nombre": "Crudo", "precio": 3000 },
+      { "nombre": "Pintado", "precio": 6000 }
+    ]
   }
 ]

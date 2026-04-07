@@ -1,5 +1,16 @@
 let productosOriginales = [];
 
+function obtenerPrecioBase(prod) {
+  if (!prod.variantes || !prod.variantes.length) return 0;
+
+  // macetas/floreros (tienen crudo/pintado)
+  if (prod.variantes[0].crudo !== undefined) {
+    return Math.min(...prod.variantes.map(v => v.crudo));
+  }
+
+  // fuentes/yeso (precio directo)
+  return Math.min(...prod.variantes.map(v => v.precio));
+}
 function formatoPrecio(valor) {
   try {
     return new Intl.NumberFormat("es-AR", {
@@ -36,7 +47,7 @@ function renderProductos(lista) {
         <p class="card-desc">${prod.descripcion || ""}</p>
         <p>${prod.tamano ? `Tamaño: ${prod.tamano}` : ""}</p>
         <p>${prod.estado === "pintado" ? "🎨 Pintado" : "🧱 Crudo"}</p>
-        <p class="card-price"><strong>${formatoPrecio(prod.precio)}</strong></p>
+        <p class="card-price"><strong>Desde ${formatoPrecio(obtenerPrecioBase(prod))}</strong>
       </div>
     `;
     contenedor.appendChild(card);
@@ -193,7 +204,22 @@ function abrirModal(prod) {
   modalNombre.textContent = prod.nombre;
   modalDescripcion.textContent =
   `${prod.descripcion || ""} ${prod.tamano ? " | Tamaño: " + prod.tamano : ""}`;
-  modalPrecio.textContent = formatoPrecio(prod.precio);
+  
+  if (prod.variantes[0].crudo !== undefined) {
+    modalPrecio.innerHTML = prod.variantes.map(v => `
+      <div>
+        Tamaño ${v.tamano}: 
+        🧱 ${formatoPrecio(v.crudo)} 
+        🎨 ${formatoPrecio(v.pintado)}
+      </div>
+    `).join("");
+  } else {
+    modalPrecio.innerHTML = prod.variantes.map(v => `
+      <div>
+        ${v.nombre}: ${formatoPrecio(v.precio)}
+      </div>
+    `).join("");
+  }
 
   const mensaje = `Hola! Me interesa este producto: ${
     prod.nombre
