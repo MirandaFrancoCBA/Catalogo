@@ -1,19 +1,17 @@
 let productosOriginales = [];
 
-// Formatear precio
 function formatoPrecio(valor) {
   try {
     return new Intl.NumberFormat("es-AR", {
       style: "currency",
       currency: "ARS",
-      maximumFractionDigits: 0
+      maximumFractionDigits: 0,
     }).format(valor);
   } catch {
     return `$${valor}`;
   }
 }
 
-// Renderizar productos con animación
 function renderProductos(lista) {
   const contenedor = document.getElementById("catalogo");
   contenedor.innerHTML = "";
@@ -30,10 +28,14 @@ function renderProductos(lista) {
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
-      <img loading="lazy" src="img/${prod.imagenes[0]}" alt="${prod.nombre}" class="card-img">
+      <img loading="lazy" src="img/${prod.imagenes[0]}" alt="${
+      prod.nombre
+    }" class="card-img">
       <div class="card-body">
         <h3 class="card-title">${prod.nombre}</h3>
         <p class="card-desc">${prod.descripcion || ""}</p>
+        <p>${prod.tamano ? `Tamaño: ${prod.tamano}` : ""}</p>
+        <p>${prod.estado === "pintado" ? "🎨 Pintado" : "🧱 Crudo"}</p>
         <p class="card-price"><strong>${formatoPrecio(prod.precio)}</strong></p>
       </div>
     `;
@@ -46,34 +48,47 @@ function renderProductos(lista) {
 
 // Aplicar filtros
 function aplicarFiltros() {
-  const query = document.getElementById("buscador")?.value.trim().toLowerCase() || "";
+  const query =
+    document.getElementById("buscador")?.value.trim().toLowerCase() || "";
   const cat = document.getElementById("filtro-categoria")?.value || "";
   const tipo = document.getElementById("filtro-tipo")?.value || "";
   const estado = document.getElementById("filtro-estado")?.value || "";
   const min = parseFloat(document.getElementById("filtro-min")?.value) || 0;
-  const max = parseFloat(document.getElementById("filtro-max")?.value) || Infinity;
+  const max =
+    parseFloat(document.getElementById("filtro-max")?.value) || Infinity;
   const orden = document.getElementById("filtro-orden")?.value || "";
 
   let filtrados = productosOriginales.filter((p) => {
     const nombre = (p.nombre || "").toLowerCase();
     const desc = (p.descripcion || "").toLowerCase();
-    const coincideBusqueda = !query || nombre.includes(query) || desc.includes(query);
+    const coincideBusqueda =
+      !query || nombre.includes(query) || desc.includes(query);
     const coincideCat = !cat || p.categoria === cat;
     const coincideTipo = !tipo || p.tipo === tipo;
     const coincideEstado = !estado || p.estado === estado;
     const coincidePrecio = p.precio >= min && p.precio <= max;
-    return coincideBusqueda && coincideCat && coincideTipo && coincideEstado && coincidePrecio;
+    return (
+      coincideBusqueda &&
+      coincideCat &&
+      coincideTipo &&
+      coincideEstado &&
+      coincidePrecio
+    );
   });
 
-  // Ordenamiento
   if (orden) {
     filtrados.sort((a, b) => {
       switch (orden) {
-        case "precio-asc": return a.precio - b.precio;
-        case "precio-desc": return b.precio - a.precio;
-        case "nombre-asc": return a.nombre.localeCompare(b.nombre, "es");
-        case "nombre-desc": return b.nombre.localeCompare(a.nombre, "es");
-        default: return 0;
+        case "precio-asc":
+          return a.precio - b.precio;
+        case "precio-desc":
+          return b.precio - a.precio;
+        case "nombre-asc":
+          return a.nombre.localeCompare(b.nombre, "es");
+        case "nombre-desc":
+          return b.nombre.localeCompare(a.nombre, "es");
+        default:
+          return 0;
       }
     });
   }
@@ -81,16 +96,23 @@ function aplicarFiltros() {
   renderProductos(filtrados);
 }
 
-// Inicializar filtros
 function initFiltros() {
-  ["buscador", "filtro-categoria", "filtro-tipo", "filtro-estado", "filtro-min", "filtro-max", "filtro-orden"].forEach((id) => {
+  [
+    "buscador",
+    "filtro-categoria",
+    "filtro-tipo",
+    "filtro-estado",
+    "filtro-min",
+    "filtro-max",
+    "filtro-orden",
+  ].forEach((id) => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", aplicarFiltros);
-    if (el && el.tagName === "SELECT") el.addEventListener("change", aplicarFiltros);
+    if (el && el.tagName === "SELECT")
+      el.addEventListener("change", aplicarFiltros);
   });
 }
 
-// Cargar productos JSON y rellenar select
 async function cargarProductos() {
   const contenedor = document.getElementById("catalogo");
   contenedor.innerHTML = "<p class='empty'>Cargando productos...</p>";
@@ -99,31 +121,38 @@ async function cargarProductos() {
     const res = await fetch("data/productos.json");
     productosOriginales = await res.json();
 
-    const categorias = [...new Set(productosOriginales.map(p => p.categoria))];
-    const tipos = [...new Set(productosOriginales.map(p => p.tipo))];
-    const estados = [...new Set(productosOriginales.map(p => p.estado))];
+    const categorias = [
+      ...new Set(productosOriginales.map((p) => p.categoria)),
+    ];
+    const tipos = [...new Set(productosOriginales.map((p) => p.tipo))];
+    const estados = [...new Set(productosOriginales.map((p) => p.estado))];
 
     const selectCat = document.getElementById("filtro-categoria");
-    categorias.forEach(c => { if(c) selectCat.appendChild(new Option(c, c)); });
+    categorias.forEach((c) => {
+      if (c) selectCat.appendChild(new Option(c, c));
+    });
 
     const selectTipo = document.getElementById("filtro-tipo");
-    tipos.forEach(t => { if(t) selectTipo.appendChild(new Option(t, t)); });
+    tipos.forEach((t) => {
+      if (t) selectTipo.appendChild(new Option(t, t));
+    });
 
     const selectEstado = document.getElementById("filtro-estado");
-    estados.forEach(e => { if(e) selectEstado.appendChild(new Option(e, e)); });
+    estados.forEach((e) => {
+      if (e) selectEstado.appendChild(new Option(e, e));
+    });
 
     renderProductos(productosOriginales);
     initFiltros();
     cambiarIdioma(idiomaActual);
-
   } catch (err) {
     console.error("Error cargando productos:", err);
-    document.getElementById("catalogo").innerHTML =
-      `<div class="empty">${textos[idiomaActual].vacio}</div>`;
+    document.getElementById(
+      "catalogo"
+    ).innerHTML = `<div class="empty">${textos[idiomaActual].vacio}</div>`;
   }
 }
 
-// Tema oscuro
 function initTema() {
   const btn = document.getElementById("btn-tema");
   if (!btn) return;
@@ -137,12 +166,13 @@ function initTema() {
   btn.addEventListener("click", () => {
     document.body.classList.toggle("dark");
     const esOscuro = document.body.classList.contains("dark");
-    btn.textContent = esOscuro ? textos[idiomaActual].btnModoClaro : textos[idiomaActual].btnModoOscuro;
+    btn.textContent = esOscuro
+      ? textos[idiomaActual].btnModoClaro
+      : textos[idiomaActual].btnModoOscuro;
     localStorage.setItem("tema", esOscuro ? "dark" : "light");
   });
 }
 
-// Modal y slider de imágenes
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modal-img");
 const modalNombre = document.getElementById("modal-nombre");
@@ -161,30 +191,35 @@ function abrirModal(prod) {
   imagenActual = 0;
   actualizarImagen();
   modalNombre.textContent = prod.nombre;
-  modalDescripcion.textContent = prod.descripcion || "";
+  modalDescripcion.textContent =
+  `${prod.descripcion || ""} ${prod.tamano ? " | Tamaño: " + prod.tamano : ""}`;
   modalPrecio.textContent = formatoPrecio(prod.precio);
 
-  const mensaje = `Hola! Me interesa este producto: ${prod.nombre} (${formatoPrecio(prod.precio)})`;
-const link = `https://wa.me/5493804682803?text=${encodeURIComponent(mensaje)}`;
+  const mensaje = `Hola! Me interesa este producto: ${
+    prod.nombre
+  } (${formatoPrecio(prod.precio)})`;
+  const link = `https://wa.me/5493804682803?text=${encodeURIComponent(
+    mensaje
+  )}`;
 
-let btn = document.getElementById("btn-consultar");
+  let btn = document.getElementById("btn-consultar");
 
-if (!btn) {
-  btn = document.createElement("a");
-  btn.id = "btn-consultar";
-  btn.target = "_blank";
-  btn.style.display = "inline-block";
-  btn.style.marginTop = "10px";
-  btn.style.padding = "10px";
-  btn.style.background = "#25D366";
-  btn.style.color = "white";
-  btn.style.borderRadius = "8px";
-  btn.style.textDecoration = "none";
-  btn.innerText = "Consultar por WhatsApp";
-  document.querySelector(".modal-content").appendChild(btn);
-}
+  if (!btn) {
+    btn = document.createElement("a");
+    btn.id = "btn-consultar";
+    btn.target = "_blank";
+    btn.style.display = "inline-block";
+    btn.style.marginTop = "10px";
+    btn.style.padding = "10px";
+    btn.style.background = "#25D366";
+    btn.style.color = "white";
+    btn.style.borderRadius = "8px";
+    btn.style.textDecoration = "none";
+    btn.innerText = "Consultar por WhatsApp";
+    document.querySelector(".modal-content").appendChild(btn);
+  }
 
-btn.href = link;
+  btn.href = link;
 }
 
 function actualizarImagen() {
@@ -194,18 +229,19 @@ function actualizarImagen() {
 }
 
 modalClose.addEventListener("click", () => modal.classList.add("hidden"));
-modal.addEventListener("click", e => {
+modal.addEventListener("click", (e) => {
   if (e.target === modal) modal.classList.add("hidden");
 });
 
-prevBtn.addEventListener("click", e => {
+prevBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   if (!imagenesProducto.length) return;
-  imagenActual = (imagenActual - 1 + imagenesProducto.length) % imagenesProducto.length;
+  imagenActual =
+    (imagenActual - 1 + imagenesProducto.length) % imagenesProducto.length;
   actualizarImagen();
 });
 
-nextBtn.addEventListener("click", e => {
+nextBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   if (!imagenesProducto.length) return;
   imagenActual = (imagenActual + 1) % imagenesProducto.length;
@@ -224,7 +260,7 @@ const textos = {
     filtroOrden: "Ordenar por:",
     vacio: "No hay productos que coincidan con la búsqueda.",
     btnModoClaro: "☀️ Modo claro",
-    btnModoOscuro: "🌙 Modo oscuro"
+    btnModoOscuro: "🌙 Modo oscuro",
   },
   en: {
     buscadorPlaceholder: "Search products...",
@@ -236,8 +272,8 @@ const textos = {
     filtroOrden: "Sort by:",
     vacio: "No products match the search.",
     btnModoClaro: "☀️ Light mode",
-    btnModoOscuro: "🌙 Dark mode"
-  }
+    btnModoOscuro: "🌙 Dark mode",
+  },
 };
 
 let idiomaActual = "es";
@@ -250,11 +286,11 @@ function cambiarIdioma(lang) {
   if (buscador) buscador.placeholder = textos[idiomaActual].buscadorPlaceholder;
 
   // labels filtros
-  document.querySelectorAll("[data-texto]").forEach(el => {
+  document.querySelectorAll("[data-texto]").forEach((el) => {
     const key = el.dataset.texto;
     if (textos[idiomaActual][key]) {
       const span = el.querySelector("span");
-      if(span){
+      if (span) {
         span.textContent = textos[idiomaActual][key];
       } else {
         el.childNodes[0].textContent = textos[idiomaActual][key] + " ";
@@ -270,16 +306,22 @@ function cambiarIdioma(lang) {
   const btn = document.getElementById("btn-tema");
   if (btn) {
     const esOscuro = document.body.classList.contains("dark");
-    btn.textContent = esOscuro ? textos[idiomaActual].btnModoClaro : textos[idiomaActual].btnModoOscuro;
+    btn.textContent = esOscuro
+      ? textos[idiomaActual].btnModoClaro
+      : textos[idiomaActual].btnModoOscuro;
   }
 
   // marcar botón activo
-  document.querySelectorAll(".lang-toggle button").forEach(b => b.classList.remove("active"));
-  const btnActivo = document.querySelector(`.lang-toggle button[onclick="cambiarIdioma('${idiomaActual}')"]`);
+  document
+    .querySelectorAll(".lang-toggle button")
+    .forEach((b) => b.classList.remove("active"));
+  const btnActivo = document.querySelector(
+    `.lang-toggle button[onclick="cambiarIdioma('${idiomaActual}')"]`
+  );
   if (btnActivo) btnActivo.classList.add("active");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    cargarProductos().then(initTema);
-    cambiarIdioma(idiomaActual);
-  });
+  cargarProductos().then(initTema);
+  cambiarIdioma(idiomaActual);
+});

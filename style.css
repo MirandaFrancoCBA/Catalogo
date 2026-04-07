@@ -208,6 +208,11 @@ body {
     animation: aparecer 0.3s ease;
   }
 
+  .card p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+  }
+
   .modal {
     display: none;
     position: fixed;
