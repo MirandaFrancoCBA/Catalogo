@@ -72,7 +72,7 @@
     "nombre": "Maceta Cilindro",
     "categoria": "macetas",
     "tipo": "cilindro",
-    "imagenes": ["ceramica/cilindro.jpg", "ceramica/pintada9.jpeg","ceramica/pintada10.jpeg"],
+    "imagenes": ["ceramica/cilindro.jpeg", "ceramica/pintada9.jpeg","ceramica/pintada10.jpeg"],
     "descripcion": "Maceta cilíndrica.",
     "variantes": [
       { "tamano": 15, "crudo": 3200, "pintado": 6500 },
