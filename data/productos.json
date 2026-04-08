@@ -141,7 +141,7 @@
     "nombre": "Figura Sol",
     "categoria": "figuras_yeso",
     "tipo": "decorativa",
-    "imagenes": ["yeso/solpintado.jpeg"],
+    "imagenes": ["yeso/sol.jpeg","yeso/solpintado.jpeg"],
     "descripcion": "Figura de yeso.",
     "variantes": [
       { "nombre": "Crudo", "precio": 3000 },
@@ -153,7 +153,7 @@
     "nombre": "Figura Luna",
     "categoria": "figuras_yeso",
     "tipo": "decorativa",
-    "imagenes": ["yeso/lunapintada.jpeg"],
+    "imagenes": ["yeso/luna.jpeg","yeso/lunapintada.jpeg"],
     "descripcion": "Figura de yeso.",
     "variantes": [
       { "nombre": "Crudo", "precio": 3000 },
