@@ -90,7 +90,7 @@
     "nombre": "Florero",
     "categoria": "floreros",
     "tipo": "clasico",
-    "imagenes": ["ceramica/florero.jpg"],
+    "imagenes": ["ceramica/florero.jpeg"],
     "descripcion": "Florero de cerámica.",
     "variantes": [
       { "tamano": 40, "crudo": 6000, "pintado": 12000 },
