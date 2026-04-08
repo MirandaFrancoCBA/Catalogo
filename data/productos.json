@@ -4,7 +4,7 @@
     "nombre": "Maceta Ollita",
     "categoria": "macetas",
     "tipo": "ollita",
-    "imagenes": ["ceramica/ollita.jpeg","ceramica/pintada1.jpeg"],
+    "imagenes": ["ceramica/ollita.jpeg","ceramica/pintada1.jpeg", "ceramica/pintada2.jpeg", "ceramica/pintada4.jpeg", "ceramica/pintada5.jpeg"],
     "descripcion": "Maceta modelo ollita.",
     "variantes": [
       { "tamano": 15, "crudo": 3200, "pintado": 6500 },
@@ -21,7 +21,7 @@
     "nombre": "Maceta Cónica",
     "categoria": "macetas",
     "tipo": "conica",
-    "imagenes": ["ceramica/maceta_conica.jpg"],
+    "imagenes": ["ceramica/conica.jepg","ceramica/pintada6.jpeg", "ceramica/pintada8.jpeg"],
     "descripcion": "Maceta cónica.",
     "variantes": [
       { "tamano": 15, "crudo": 3200, "pintado": 6500 },
