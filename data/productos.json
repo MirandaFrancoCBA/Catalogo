@@ -4,7 +4,7 @@
     "nombre": "Maceta Ollita",
     "categoria": "macetas",
     "tipo": "ollita",
-    "imagenes": ["ceramica/ollita.jpeg","ceramica/pintada1.jpeg", "ceramica/pintada2.jpeg", "ceramica/pintada4.jpeg", "ceramica/pintada5.jpeg"],
+    "imagenes": ["ceramica/ollita.jpeg","ceramica/pintada1.jpeg", "ceramica/pintada2.jpeg","ceramica/pintada5.jpeg", "ceramica/pintada4.jpeg", "ceramica/pintada5.jpeg"],
     "descripcion": "Maceta modelo ollita.",
     "variantes": [
       { "tamano": 15, "crudo": 3200, "pintado": 6500 },
@@ -21,7 +21,7 @@
     "nombre": "Maceta Cónica",
     "categoria": "macetas",
     "tipo": "conica",
-    "imagenes": ["ceramica/conica.jepg","ceramica/pintada6.jpeg", "ceramica/pintada8.jpeg"],
+    "imagenes": ["ceramica/conica.jpeg","ceramica/pintada6.jpeg", "ceramica/pintada8.jpeg"],
     "descripcion": "Maceta cónica.",
     "variantes": [
       { "tamano": 15, "crudo": 3200, "pintado": 6500 },
@@ -38,7 +38,7 @@
     "nombre": "Maceta Media Bocha",
     "categoria": "macetas",
     "tipo": "media_bocha",
-    "imagenes": ["ceramica/maceta_bocha.jpg"],
+    "imagenes": ["ceramica/mediabocha.jpeg", "ceramica/pintada3.jpeg"],
     "descripcion": "Maceta media bocha.",
     "variantes": [
       { "tamano": 15, "crudo": 3200, "pintado": 6500 },
@@ -55,7 +55,7 @@
     "nombre": "Maceta Holandesa",
     "categoria": "macetas",
     "tipo": "holandesa",
-    "imagenes": ["ceramica/maceta_holandesa.jpg"],
+    "imagenes": ["ceramica/holandesa.jpg"],
     "descripcion": "Maceta estilo holandesa.",
     "variantes": [
       { "tamano": 15, "crudo": 3200, "pintado": 6500 },
@@ -72,7 +72,7 @@
     "nombre": "Maceta Cilindro",
     "categoria": "macetas",
     "tipo": "cilindro",
-    "imagenes": ["ceramica/maceta_cilindro.jpg"],
+    "imagenes": ["ceramica/cilindro.jpg", "ceramica/pintada9.jpeg","ceramica/pintada10.jpeg"],
     "descripcion": "Maceta cilíndrica.",
     "variantes": [
       { "tamano": 15, "crudo": 3200, "pintado": 6500 },
@@ -101,10 +101,10 @@
 
   {
     "id": 20,
-    "nombre": "Fuente Cuadrada",
+    "nombre": "Fuente Cuadro",
     "categoria": "fuentes",
     "tipo": "cuadrada",
-    "imagenes": ["otros/fuente_cuadrada.jpg"],
+    "imagenes": ["ceramica/fuentesimple.jpeg", "ceramica/fuentesimple2.jpeg", "ceramica/fuentenegra.jpeg", "ceramica/fuentenegra2.jpeg"],
     "descripcion": "Fuente de agua cuadrada.",
     "variantes": [
       { "nombre": "Simple", "precio": 25000 },
@@ -116,7 +116,7 @@
     "nombre": "Fuente Plato",
     "categoria": "fuentes",
     "tipo": "plato",
-    "imagenes": ["otros/fuente_plato.jpg"],
+    "imagenes": ["ceramica/fuenteplato.jpeg", "ceramica/fuenteplato2.jpeg"],
     "descripcion": "Fuente estilo plato.",
     "variantes": [
       { "nombre": "Cuarzo", "precio": 25000 },
@@ -128,7 +128,7 @@
     "nombre": "Fuente Groot",
     "categoria": "fuentes",
     "tipo": "groot",
-    "imagenes": ["otros/fuente_groot.jpg"],
+    "imagenes": ["ceramica/fuentegrootgrande.jpeg"],
     "descripcion": "Fuente Groot.",
     "variantes": [
       { "nombre": "Chico", "precio": 40000 },
@@ -141,7 +141,7 @@
     "nombre": "Figura Sol",
     "categoria": "figuras_yeso",
     "tipo": "decorativa",
-    "imagenes": ["yeso/sol.jpg"],
+    "imagenes": ["yeso/solpintado.jpeg"],
     "descripcion": "Figura de yeso.",
     "variantes": [
       { "nombre": "Crudo", "precio": 3000 },
@@ -153,7 +153,7 @@
     "nombre": "Figura Luna",
     "categoria": "figuras_yeso",
     "tipo": "decorativa",
-    "imagenes": ["yeso/luna.jpg"],
+    "imagenes": ["yeso/lunapintada.jpeg"],
     "descripcion": "Figura de yeso.",
     "variantes": [
       { "nombre": "Crudo", "precio": 3000 },
@@ -166,7 +166,7 @@
     "nombre": "Figura Negra Africana",
     "categoria": "figuras_yeso",
     "tipo": "decorativa",
-    "imagenes": ["yeso/negra.jpg"],
+    "imagenes": ["ceramica/cuadronegra.jpeg"],
     "descripcion": "Figura decorativa africana de yeso.",
     "variantes": [
       { "nombre": "Sentada", "precio": 9000 },
