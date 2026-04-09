@@ -37,7 +37,7 @@ function renderProductos(lista) {
 
   lista.forEach((prod, index) => {
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "card col";
     card.innerHTML = `
       <img loading="lazy" src="img/${prod.imagenes[0]}" alt="${
       prod.nombre
@@ -72,19 +72,25 @@ function aplicarFiltros() {
   let filtrados = productosOriginales.filter((p) => {
     const nombre = (p.nombre || "").toLowerCase();
     const desc = (p.descripcion || "").toLowerCase();
-    const coincideBusqueda =
-      !query || nombre.includes(query) || desc.includes(query);
+  
+    const coincideBusqueda = !query || nombre.includes(query) || desc.includes(query);
     const coincideCat = !cat || p.categoria === cat;
     const coincideTipo = !tipo || p.tipo === tipo;
-    const coincideEstado = !estado || p.estado === estado;
-    const coincidePrecio = p.precio >= min && p.precio <= max;
-    return (
-      coincideBusqueda &&
-      coincideCat &&
-      coincideTipo &&
-      coincideEstado &&
-      coincidePrecio
-    );
+  
+    // estado (crudo/pintado)
+    let coincideEstado = true;
+    if (estado) {
+      if (p.variantes[0].crudo !== undefined) {
+        coincideEstado = p.variantes.some(v => estado === "crudo" ? v.crudo : v.pintado);
+      } else {
+        coincideEstado = true;
+      }
+    }
+  
+    const precioBase = obtenerPrecioBase(p);
+    const coincidePrecio = precioBase >= min && precioBase <= max;
+  
+    return coincideBusqueda && coincideCat && coincideTipo && coincideEstado && coincidePrecio;
   });
 
   if (orden) {
