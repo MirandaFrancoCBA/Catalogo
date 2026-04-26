@@ -753,3 +753,17 @@ footer a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.checkout-form input,
+.checkout-form textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}

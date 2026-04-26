@@ -147,6 +147,17 @@ function pagar() {
     return;
   }
 
+  const nombre = document.getElementById("nombre").value;
+  const telefonoCliente = document.getElementById("telefono").value;
+  const direccion = document.getElementById("direccion").value;
+  const cp = document.getElementById("cp").value;
+  const nota = document.getElementById("nota").value;
+
+  if (!nombre || !telefonoCliente) {
+    alert("Completá nombre y teléfono");
+    return;
+  }
+
   const subtotal = calcularSubtotal();
   const total = subtotal + costoEnvio;
 
@@ -154,20 +165,26 @@ function pagar() {
     `• ${p.nombre} (${p.variante}) x${p.cantidad} - ${formatoPrecio(p.precio * p.cantidad)}`
   ).join("\n");
 
-  const mensaje = `Hola! Quiero cotizar este pedido 👇
+  const mensaje = `🧾 *Nuevo pedido*
 
+👤 Nombre: ${nombre}
+📱 Teléfono: ${telefonoCliente}
+📍 Dirección: ${direccion || "No indicada"}
+📮 CP: ${cp || "No indicado"}
+
+🛒 *Productos:*
 ${detalle}
 
-Subtotal: ${formatoPrecio(subtotal)}
-Envío: ${formatoPrecio(costoEnvio)}
-Total estimado: ${formatoPrecio(total)}
+💰 Subtotal: ${formatoPrecio(subtotal)}
+🚚 Envío: ${formatoPrecio(costoEnvio)}
+💵 Total estimado: ${formatoPrecio(total)}
 
-Mi código postal es: ${document.getElementById("cp").value || "No informado"}
+📝 Nota: ${nota || "Sin aclaraciones"}
 `;
 
-  const telefono = "5493804527600";
-  localStorage.setItem("ultimoPedido", JSON.stringify(carrito));
-  window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`);
+  const telefonoNegocio = "5493541527600";
+
+  window.open(`https://wa.me/${telefonoNegocio}?text=${encodeURIComponent(mensaje)}`);
 }
 
 /* =========================
