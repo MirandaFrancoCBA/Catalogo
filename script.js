@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initTema();
     renderCarrito();
     initCarritoToggle();
+    initUbicacion();
   });
 
   cambiarIdioma(idiomaActual);
@@ -36,17 +37,27 @@ function initCarritoToggle() {
 function agregarAlCarrito(prod) {
   let variante = prod.variantes[0];
   let precio = variante.crudo ?? variante.precio;
+  let nombreVariante = variante.tamano || variante.nombre;
 
-  carrito.push({
-    id: prod.id,
-    nombre: prod.nombre,
-    variante: variante.tamano || variante.nombre,
-    precio: precio,
-    cantidad: 1
-  });
+  const existente = carrito.find(item =>
+    item.id === prod.id && item.variante === nombreVariante
+  );
+
+  if (existente) {
+    existente.cantidad++;
+  } else {
+    carrito.push({
+      id: prod.id,
+      nombre: prod.nombre,
+      variante: nombreVariante,
+      precio: precio,
+      cantidad: 1
+    });
+  }
 
   guardarCarrito();
   renderCarrito();
+  mostrarToast("Agregado al carrito 🛒");
 }
 
 function renderCarrito() {
@@ -129,11 +140,18 @@ function calcularEnvio(cp) {
 }
 
 function calcularEnvioUI() {
-  const cp = document.getElementById("cp").value;
-  costoEnvio = calcularEnvio(cp);
+  const provincia = document.getElementById("provincia").value;
+  const ciudad = document.getElementById("ciudad").value;
+
+  if (!provincia || !ciudad) {
+    alert("Seleccioná provincia y ciudad");
+    return;
+  }
+
+  costoEnvio = costosEnvio[provincia] || 0;
 
   document.getElementById("envio-texto").textContent =
-    "Envío: " + formatoPrecio(costoEnvio);
+    `Envío a ${ciudad}: ${formatoPrecio(costoEnvio)}`;
 
   actualizarTotales();
 }
@@ -146,15 +164,16 @@ function pagar() {
     alert("El carrito está vacío");
     return;
   }
-
+  const provincia = document.getElementById("provincia").value;
+  const ciudad = document.getElementById("ciudad").value;
   const nombre = document.getElementById("nombre").value;
   const telefonoCliente = document.getElementById("telefono").value;
   const direccion = document.getElementById("direccion").value;
   const cp = document.getElementById("cp").value;
   const nota = document.getElementById("nota").value;
 
-  if (!nombre || !telefonoCliente) {
-    alert("Completá nombre y teléfono");
+  if (!nombre || !telefonoCliente || !provincia || !ciudad) {
+    alert("Completá nombre, teléfono, provincia y ciudad");
     return;
   }
 
@@ -178,6 +197,7 @@ ${detalle}
 💰 Subtotal: ${formatoPrecio(subtotal)}
 🚚 Envío: ${formatoPrecio(costoEnvio)}
 💵 Total estimado: ${formatoPrecio(total)}
+📍 Ubicación: ${ciudad}, ${provincia}
 
 📝 Nota: ${nota || "Sin aclaraciones"}
 `;
@@ -482,3 +502,78 @@ function mostrarToast(msg) {
     toast.classList.remove("show");
   }, 2000);
 }
+
+const ubicaciones = {
+  "Córdoba": ["Córdoba Capital", "Villa Carlos Paz", "Cosquín", "La Falda", "Alta Gracia", "Río Cuarto"],
+  "Buenos Aires": ["La Plata", "Mar del Plata", "Bahía Blanca", "Tandil", "San Nicolás"],
+  "CABA": ["Ciudad Autónoma de Buenos Aires"],
+  "Santa Fe": ["Rosario", "Santa Fe Capital", "Rafaela"],
+  "Mendoza": ["Mendoza Capital", "Godoy Cruz", "San Rafael"],
+  "Tucumán": ["San Miguel de Tucumán"],
+  "Salta": ["Salta Capital"],
+  "Jujuy": ["San Salvador de Jujuy"],
+  "Catamarca": ["San Fernando del Valle"],
+  "La Rioja": ["La Rioja Capital"],
+  "San Juan": ["San Juan Capital"],
+  "San Luis": ["San Luis Capital", "Villa Mercedes"],
+  "La Pampa": ["Santa Rosa"],
+  "Neuquén": ["Neuquén Capital"],
+  "Río Negro": ["Bariloche", "General Roca", "Viedma"],
+  "Chubut": ["Comodoro Rivadavia", "Trelew", "Puerto Madryn"],
+  "Santa Cruz": ["Río Gallegos", "Caleta Olivia"],
+  "Tierra del Fuego": ["Ushuaia", "Río Grande"],
+  "Chaco": ["Resistencia"],
+  "Formosa": ["Formosa Capital"],
+  "Corrientes": ["Corrientes Capital"],
+  "Misiones": ["Posadas", "Puerto Iguazú"],
+  "Santiago del Estero": ["Santiago Capital"],
+  "Entre Ríos": ["Paraná", "Concordia"]
+};
+
+function initUbicacion() {
+  const selectProv = document.getElementById("provincia");
+  const selectCiudad = document.getElementById("ciudad");
+
+  if (!selectProv || !selectCiudad) return; // 🔥 evita romper
+
+  Object.keys(ubicaciones).forEach(prov => {
+    selectProv.add(new Option(prov, prov));
+  });
+
+  selectProv.addEventListener("change", () => {
+    const ciudades = ubicaciones[selectProv.value] || [];
+
+    selectCiudad.innerHTML = `<option value="">Seleccionar ciudad</option>`;
+
+    ciudades.forEach(ciudad => {
+      selectCiudad.add(new Option(ciudad, ciudad));
+    });
+  });
+}
+
+const costosEnvio = {
+  "Córdoba": 2500,
+  "Buenos Aires": 4000,
+  "CABA": 3500,
+  "Santa Fe": 3500,
+  "Mendoza": 4500,
+  "Tucumán": 4500,
+  "Salta": 5000,
+  "Jujuy": 5000,
+  "Catamarca": 5000,
+  "La Rioja": 5000,
+  "San Juan": 4500,
+  "San Luis": 3500,
+  "La Pampa": 4000,
+  "Neuquén": 5500,
+  "Río Negro": 6000,
+  "Chubut": 6500,
+  "Santa Cruz": 7000,
+  "Tierra del Fuego": 8000,
+  "Chaco": 4500,
+  "Formosa": 4500,
+  "Corrientes": 4500,
+  "Misiones": 5000,
+  "Santiago del Estero": 4500,
+  "Entre Ríos": 3500
+};

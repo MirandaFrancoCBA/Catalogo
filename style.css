@@ -767,3 +767,37 @@ footer a:hover {
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+
+.envio-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.carrito {
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.modal-content {
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body {
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.modal-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 300px;
+}
+
+.modal-img-container img {
+  max-height: 280px;
+  object-fit: contain;
+}
