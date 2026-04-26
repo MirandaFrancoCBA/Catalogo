@@ -2,6 +2,7 @@ let productosOriginales = [];
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let costoEnvio = 0;
+let idiomaActual = "es";
 
 /* =========================
    INIT (cuando carga DOM)
@@ -142,7 +143,7 @@ function calcularEnvioUI() {
 ========================= */
 async function pagar() {
   try {
-    const res = await fetch("https://backend-tienda-2.onrender.com", {
+    const res = await fetch("https://backend-tienda-2.onrender.com/crear-pago", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
