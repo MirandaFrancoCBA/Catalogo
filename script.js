@@ -140,19 +140,28 @@ function calcularEnvioUI() {
 /* =========================
    PAGO (WHATSAPP)
 ========================= */
-function pagar() {
-  const total = calcularSubtotal() + costoEnvio;
+async function pagar() {
+  try {
+    const res = await fetch("https://TU-BACKEND.onrender.com/crear-pago", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ items: carrito })
+    });
 
-  let detalle = carrito.map(p =>
-    `${p.nombre} (${p.variante}) x${p.cantidad}`
-  ).join(", ");
+    const data = await res.json();
 
-  const mensaje = `Hola, quisiera pedirte lo siguiente:
-${detalle}
+    // guardamos el carrito para usarlo después
+    localStorage.setItem("ultimoPedido", JSON.stringify(carrito));
 
-Total: ${formatoPrecio(total)}`;
+    // redirige a MercadoPago
+    window.location.href = data.url;
 
-  window.open(`https://wa.me/5493541527600?text=${encodeURIComponent(mensaje)}`);
+  } catch (err) {
+    console.error("Error al iniciar pago:", err);
+    alert("Hubo un problema al iniciar el pago");
+  }
 }
 
 /* =========================

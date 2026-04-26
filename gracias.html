@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gracias por tu compra</title>
+</head>
+<body>
+
+  <h1>🎉 ¡Gracias por tu compra!</h1>
+
+  <p>Tu pago fue recibido.</p>
+
+  <button onclick="enviarWhatsApp()">Enviar pedido por WhatsApp</button>
+
+  <script>
+    function enviarWhatsApp() {
+      const carrito = JSON.parse(localStorage.getItem("ultimoPedido")) || [];
+
+      let detalle = carrito.map(p =>
+        `${p.nombre} (${p.variante}) x${p.cantidad}`
+      ).join("\n");
+
+      const mensaje = `Hola! Ya realicé el pago. Mi pedido es:\n\n${detalle}`;
+
+      window.open(`https://wa.me/5493804682803?text=${encodeURIComponent(mensaje)}`);
+    }
+  </script>
+
+</body>
+</html>
