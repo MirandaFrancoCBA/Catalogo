@@ -9,28 +9,28 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="responsive.css" />
   </head>
-  <div id="carrito-lateral" class="carrito">
-    <h3>🛒 Tu compra</h3>
-  
-    <div id="carrito-items"></div>
-  
-    <div class="carrito-envio">
-      <input type="text" id="cp" placeholder="Código postal">
-      <button onclick="calcularEnvioUI()">Calcular envío</button>
-      <p id="envio-texto"></p>
-    </div>
-  
-    <hr>
-  
-    <p>Subtotal: <span id="subtotal"></span></p>
-    <p>Envío: <span id="envio"></span></p>
-    <h4>Total: <span id="total"></span></h4>
-  
-    <button onclick="pagar()" class="btn-pagar">Pagar</button>
-  </div>
-  
-  <button id="btn-carrito-toggle">🛒</button>
   <body>
+    <div id="carrito-lateral" class="carrito">
+      <h3>🛒 Tu compra</h3>
+    
+      <div id="carrito-items"></div>
+    
+      <div class="carrito-envio">
+        <input type="text" id="cp" placeholder="Código postal">
+        <button onclick="calcularEnvioUI()">Calcular envío</button>
+        <p id="envio-texto"></p>
+      </div>
+    
+      <hr>
+    
+      <p>Subtotal: <span id="subtotal"></span></p>
+      <p>Envío: <span id="envio"></span></p>
+      <h4>Total: <span id="total"></span></h4>
+    
+      <button onclick="pagar()" class="btn-pagar">Pagar</button>
+    </div>
+    
+    <button id="btn-carrito-toggle">🛒</button>
     <header>
       <h1>Catálogo de Productos 2026</h1>
       <p>Bienvenido a EL Laberinto 🌿</p>
