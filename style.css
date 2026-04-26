@@ -508,3 +508,45 @@ body {
       }
     }
   }
+
+  .carrito {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 350px;
+    height: 100%;
+    background: white;
+    padding: 20px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    transition: right 0.3s;
+    z-index: 2000;
+    overflow-y: auto;
+  }
+  
+  .carrito.open {
+    right: 0;
+  }
+  
+  #btn-carrito-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 80px;
+    z-index: 2001;
+    padding: 12px;
+    border-radius: 50%;
+  }
+  
+  .carrito-item {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .btn-pagar {
+    width: 100%;
+    padding: 10px;
+    background: #009ee3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+  }
