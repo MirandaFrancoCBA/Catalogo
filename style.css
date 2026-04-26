@@ -572,3 +572,40 @@ body {
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .carrito-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .carrito-top {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .carrito-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+  
+  .cantidad-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .cantidad-control button {
+    width: 25px;
+    height: 25px;
+    border: none;
+    background: #009ee3;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .precio {
+    font-weight: bold;
+  }

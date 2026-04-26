@@ -59,12 +59,24 @@ function renderCarrito() {
     div.className = "carrito-item";
 
     div.innerHTML = `
-      <p>${item.nombre}</p>
-      <small>${item.variante}</small>
-      <p>${formatoPrecio(item.precio)}</p>
+      <div class="carrito-top">
+        <strong>${item.nombre}</strong>
+        <button onclick="eliminarItem(${index})">✖</button>
+      </div>
 
-      <input type="number" min="1" value="${item.cantidad}" onchange="cambiarCantidad(${index}, this.value)">
-      <button onclick="eliminarItem(${index})">❌</button>
+      <small>${item.variante}</small>
+
+      <div class="carrito-bottom">
+        <div class="cantidad-control">
+          <button onclick="restarCantidad(${index})">−</button>
+          <span>${item.cantidad}</span>
+          <button onclick="sumarCantidad(${index})">+</button>
+        </div>
+
+        <div class="precio">
+          ${formatoPrecio(item.precio * item.cantidad)}
+        </div>
+      </div>
     `;
 
     contenedor.appendChild(div);
@@ -387,17 +399,42 @@ function agregarVarianteAlCarrito(prodId, varianteIndex, tipo = null) {
     nombreVariante = variante.nombre;
   }
 
-  carrito.push({
-    id: prod.id,
-    nombre: prod.nombre,
-    variante: nombreVariante,
-    precio: precio,
-    cantidad: 1
-  });
+  const existente = carrito.find(item =>
+    item.id === prod.id && item.variante === nombreVariante
+  );
+  
+  if (existente) {
+    existente.cantidad++;
+  } else {
+    carrito.push({
+      id: prod.id,
+      nombre: prod.nombre,
+      variante: nombreVariante,
+      precio: precio,
+      cantidad: 1
+    });
+  }
 
   guardarCarrito();
   renderCarrito();
 
   // feedback visual
   alert("Agregado al carrito 🛒");
+}
+
+function sumarCantidad(index) {
+  carrito[index].cantidad++;
+  guardarCarrito();
+  renderCarrito();
+}
+
+function restarCantidad(index) {
+  carrito[index].cantidad--;
+
+  if (carrito[index].cantidad <= 0) {
+    carrito.splice(index, 1);
+  }
+
+  guardarCarrito();
+  renderCarrito();
 }
