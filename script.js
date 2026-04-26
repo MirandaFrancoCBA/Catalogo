@@ -142,7 +142,7 @@ function calcularEnvioUI() {
 ========================= */
 async function pagar() {
   try {
-    const res = await fetch("https://TU-BACKEND.onrender.com/crear-pago", {
+    const res = await fetch("https://backend-tienda-2.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -152,7 +152,7 @@ async function pagar() {
 
     const data = await res.json();
 
-    // guardamos el carrito para usarlo después
+    // guardamos pedido para después
     localStorage.setItem("ultimoPedido", JSON.stringify(carrito));
 
     // redirige a MercadoPago
