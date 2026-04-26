@@ -147,12 +147,12 @@ function pagar() {
     `${p.nombre} (${p.variante}) x${p.cantidad}`
   ).join(", ");
 
-  const mensaje = `Pedido:
+  const mensaje = `Hola, quisiera pedirte lo siguiente:
 ${detalle}
 
 Total: ${formatoPrecio(total)}`;
 
-  window.open(`https://wa.me/5493804682803?text=${encodeURIComponent(mensaje)}`);
+  window.open(`https://wa.me/5493541527600?text=${encodeURIComponent(mensaje)}`);
 }
 
 /* =========================
