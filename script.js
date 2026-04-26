@@ -429,7 +429,7 @@ function agregarVarianteAlCarrito(prodId, varianteIndex, tipo = null) {
   renderCarrito();
 
   // feedback visual
-  alert("Agregado al carrito 🛒");
+  mostrarToast("Agregado al carrito 🛒");
 }
 
 function sumarCantidad(index) {
@@ -447,4 +447,16 @@ function restarCantidad(index) {
 
   guardarCarrito();
   renderCarrito();
+}
+
+function mostrarToast(msg) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.textContent = msg;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000);
 }
