@@ -276,18 +276,29 @@ function abrirModal(prod) {
   modalNombre.textContent = prod.nombre;
   modalDescripcion.textContent = prod.descripcion || "";
 
-  // precios
+  // 🔥 GENERAR VARIANTES INTERACTIVAS
   if (prod.variantes[0].crudo !== undefined) {
-    modalPrecio.innerHTML = prod.variantes.map(v => `
-      <div>
-        ${v.tamano}cm →
-        🧱 ${formatoPrecio(v.crudo)} 
-        🎨 ${formatoPrecio(v.pintado)}
+    modalPrecio.innerHTML = prod.variantes.map((v, i) => `
+      <div class="modal-variante">
+        <strong>${v.tamano}cm</strong><br>
+
+        <div class="variante-linea">
+          🧱 ${formatoPrecio(v.crudo)}
+          <button onclick="agregarVarianteAlCarrito(${prod.id}, ${i}, 'crudo')">+</button>
+        </div>
+
+        <div class="variante-linea">
+          🎨 ${formatoPrecio(v.pintado)}
+          <button onclick="agregarVarianteAlCarrito(${prod.id}, ${i}, 'pintado')">+</button>
+        </div>
       </div>
     `).join("");
   } else {
-    modalPrecio.innerHTML = prod.variantes.map(v => `
-      <div>${v.nombre}: ${formatoPrecio(v.precio)}</div>
+    modalPrecio.innerHTML = prod.variantes.map((v, i) => `
+      <div class="modal-variante">
+        ${v.nombre} - ${formatoPrecio(v.precio)}
+        <button onclick="agregarVarianteAlCarrito(${prod.id}, ${i})">+</button>
+      </div>
     `).join("");
   }
 }
@@ -354,4 +365,39 @@ function initTema() {
 function cambiarIdioma(lang) {
   // versión simple para que no rompa
   console.log("Idioma cambiado a:", lang);
+}
+
+function agregarVarianteAlCarrito(prodId, varianteIndex, tipo = null) {
+  const prod = productosOriginales.find(p => p.id === prodId);
+  if (!prod) return;
+
+  const variante = prod.variantes[varianteIndex];
+
+  let precio;
+  let nombreVariante;
+
+  if (tipo === "crudo") {
+    precio = variante.crudo;
+    nombreVariante = `${variante.tamano}cm (Crudo)`;
+  } else if (tipo === "pintado") {
+    precio = variante.pintado;
+    nombreVariante = `${variante.tamano}cm (Pintado)`;
+  } else {
+    precio = variante.precio;
+    nombreVariante = variante.nombre;
+  }
+
+  carrito.push({
+    id: prod.id,
+    nombre: prod.nombre,
+    variante: nombreVariante,
+    precio: precio,
+    cantidad: 1
+  });
+
+  guardarCarrito();
+  renderCarrito();
+
+  // feedback visual
+  alert("Agregado al carrito 🛒");
 }

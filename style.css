@@ -550,3 +550,25 @@ body {
     border: none;
     border-radius: 8px;
   }
+
+  .modal-variante {
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
+  }
+  
+  .variante-linea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+  }
+  
+  .variante-linea button,
+  .modal-variante button {
+    padding: 4px 8px;
+    border: none;
+    background: #009ee3;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
