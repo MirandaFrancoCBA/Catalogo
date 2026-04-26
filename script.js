@@ -141,28 +141,33 @@ function calcularEnvioUI() {
 /* =========================
    PAGO (WHATSAPP)
 ========================= */
-async function pagar() {
-  try {
-    const res = await fetch("https://backend-tienda-2.onrender.com/crear-pago", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ items: carrito })
-    });
-
-    const data = await res.json();
-
-    // guardamos pedido para después
-    localStorage.setItem("ultimoPedido", JSON.stringify(carrito));
-
-    // redirige a MercadoPago
-    window.location.href = data.url;
-
-  } catch (err) {
-    console.error("Error al iniciar pago:", err);
-    alert("Hubo un problema al iniciar el pago");
+function pagar() {
+  if (!carrito.length) {
+    alert("El carrito está vacío");
+    return;
   }
+
+  const subtotal = calcularSubtotal();
+  const total = subtotal + costoEnvio;
+
+  let detalle = carrito.map(p =>
+    `• ${p.nombre} (${p.variante}) x${p.cantidad} - ${formatoPrecio(p.precio * p.cantidad)}`
+  ).join("\n");
+
+  const mensaje = `Hola! Quiero cotizar este pedido 👇
+
+${detalle}
+
+Subtotal: ${formatoPrecio(subtotal)}
+Envío: ${formatoPrecio(costoEnvio)}
+Total estimado: ${formatoPrecio(total)}
+
+Mi código postal es: ${document.getElementById("cp").value || "No informado"}
+`;
+
+  const telefono = "5493804527600";
+  localStorage.setItem("ultimoPedido", JSON.stringify(carrito));
+  window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`);
 }
 
 /* =========================

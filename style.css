@@ -725,3 +725,31 @@ body {
     margin-bottom: 15px;
   }
 }
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 30px;
+}
+
+footer {
+  background: #111;
+  color: #eee;
+}
+
+footer a {
+  color: #25D366;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* 📱 responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+}
