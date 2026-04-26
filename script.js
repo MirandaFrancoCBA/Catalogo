@@ -248,3 +248,110 @@ async function cargarProductos() {
     console.error(err);
   }
 }
+
+/* =========================
+   MODAL (FIX COMPLETO)
+========================= */
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modal-img");
+const modalNombre = document.getElementById("modal-nombre");
+const modalDescripcion = document.getElementById("modal-descripcion");
+const modalPrecio = document.getElementById("modal-precio");
+const modalClose = document.querySelector(".modal-close");
+const prevBtn = document.getElementById("prev-img");
+const nextBtn = document.getElementById("next-img");
+
+let imagenActual = 0;
+let imagenesProducto = [];
+
+function abrirModal(prod) {
+  if (!modal) return;
+
+  modal.classList.remove("hidden");
+
+  imagenesProducto = prod.imagenes || [];
+  imagenActual = 0;
+  actualizarImagen();
+
+  modalNombre.textContent = prod.nombre;
+  modalDescripcion.textContent = prod.descripcion || "";
+
+  // precios
+  if (prod.variantes[0].crudo !== undefined) {
+    modalPrecio.innerHTML = prod.variantes.map(v => `
+      <div>
+        ${v.tamano}cm →
+        🧱 ${formatoPrecio(v.crudo)} 
+        🎨 ${formatoPrecio(v.pintado)}
+      </div>
+    `).join("");
+  } else {
+    modalPrecio.innerHTML = prod.variantes.map(v => `
+      <div>${v.nombre}: ${formatoPrecio(v.precio)}</div>
+    `).join("");
+  }
+}
+
+function actualizarImagen() {
+  if (imagenesProducto.length && modalImg) {
+    modalImg.src = `img/${imagenesProducto[imagenActual]}`;
+  }
+}
+
+if (modalClose) {
+  modalClose.onclick = () => modal.classList.add("hidden");
+}
+
+if (modal) {
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.classList.add("hidden");
+  });
+}
+
+if (prevBtn) {
+  prevBtn.onclick = (e) => {
+    e.stopPropagation();
+    imagenActual = (imagenActual - 1 + imagenesProducto.length) % imagenesProducto.length;
+    actualizarImagen();
+  };
+}
+
+if (nextBtn) {
+  nextBtn.onclick = (e) => {
+    e.stopPropagation();
+    imagenActual = (imagenActual + 1) % imagenesProducto.length;
+    actualizarImagen();
+  };
+}
+
+/* =========================
+   TEMA (FIX)
+========================= */
+function initTema() {
+  const btn = document.getElementById("btn-tema");
+  if (!btn) return;
+
+  const temaGuardado = localStorage.getItem("tema");
+
+  if (temaGuardado === "dark") {
+    document.body.classList.add("dark");
+    btn.textContent = "☀️ Modo claro";
+  }
+
+  btn.onclick = () => {
+    document.body.classList.toggle("dark");
+
+    const esOscuro = document.body.classList.contains("dark");
+    btn.textContent = esOscuro ? "☀️ Modo claro" : "🌙 Modo oscuro";
+
+    localStorage.setItem("tema", esOscuro ? "dark" : "light");
+  };
+}
+
+/* =========================
+   IDIOMA (FIX MINIMO)
+========================= */
+function cambiarIdioma(lang) {
+  // versión simple para que no rompa
+  console.log("Idioma cambiado a:", lang);
+}
