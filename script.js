@@ -327,6 +327,7 @@ const nextBtn = document.getElementById("next-img");
 
 let imagenActual = 0;
 let imagenesProducto = [];
+const modalThumbs = document.getElementById("modal-thumbs");
 
 function abrirModal(prod) {
   if (!modal) return;
@@ -335,10 +336,12 @@ function abrirModal(prod) {
 
   imagenesProducto = prod.imagenes || [];
   imagenActual = 0;
-  actualizarImagen();
 
   modalNombre.textContent = prod.nombre;
   modalDescripcion.textContent = prod.descripcion || "";
+
+  renderGaleria();
+  actualizarImagen();
 
   // 🔥 GENERAR VARIANTES INTERACTIVAS
   if (prod.variantes[0].crudo !== undefined) {
@@ -577,3 +580,36 @@ const costosEnvio = {
   "Santiago del Estero": 4500,
   "Entre Ríos": 3500
 };
+
+function renderGaleria() {
+  if (!modalThumbs) return;
+
+  modalThumbs.innerHTML = "";
+
+  imagenesProducto.forEach((img, index) => {
+    const thumb = document.createElement("img");
+    thumb.src = `img/${img}`;
+
+    if (index === imagenActual) {
+      thumb.classList.add("active");
+    }
+
+    thumb.onclick = () => {
+      imagenActual = index;
+      actualizarImagen();
+    };
+
+    modalThumbs.appendChild(thumb);
+  });
+}
+
+function actualizarImagen() {
+  if (!modalImg) return;
+
+  modalImg.src = `img/${imagenesProducto[imagenActual]}`;
+
+  // actualizar thumbnails activos
+  document.querySelectorAll(".modal-thumbs img").forEach((img, i) => {
+    img.classList.toggle("active", i === imagenActual);
+  });
+}

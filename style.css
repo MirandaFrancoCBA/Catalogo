@@ -44,20 +44,11 @@ header {
   transform: translateY(-5px) scale(1.02);
 }
 
+/* 🔥 FIX IMAGENES */
 .card img {
   width: 100%;
-  height: 180px;
+  aspect-ratio: 1/1;
   object-fit: cover;
-}
-
-.card-body {
-  padding: 1rem;
-  text-align: center;
-}
-
-.card-price {
-  font-weight: bold;
-  color: #8d6e63;
 }
 
 /* =========================
@@ -84,27 +75,12 @@ header {
   padding: 1rem;
 }
 
-.filtros label {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.9rem;
-}
-
-.filtros input,
-.filtros select {
-  padding: 0.4rem;
-  border-radius: 6px;
-}
-
 /* =========================
-   MODAL (VERSIÓN FINAL LIMPIA)
+   MODAL
 ========================= */
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0,0,0,0.7);
 
   display: flex;
@@ -125,7 +101,7 @@ header {
   max-height: 90vh;
 
   border-radius: 12px;
-  padding: 20px;
+  padding: 16px;
 
   display: flex;
   flex-direction: column;
@@ -136,12 +112,13 @@ header {
   overflow-y: auto;
 }
 
-/* 📸 imagen centrada */
+/* 🔥 CLAVE */
 .modal-img-container {
+  position: relative; /* 👈 FIX */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px;
+  height: 260px;
   margin-bottom: 10px;
 }
 
@@ -156,68 +133,64 @@ header {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 24px;
-  background: rgba(255,255,255,0.8);
+
+  font-size: 26px;
+  background: rgba(255,255,255,0.9);
   border: none;
   cursor: pointer;
+
+  padding: 6px 10px;
+  border-radius: 8px;
 }
 
-#prev-img { left: 10px; }
-#next-img { right: 10px; }
+#prev-img { left: 5px; }
+#next-img { right: 5px; }
 
 .modal-close {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
+  top: 8px;
+  right: 12px;
+  font-size: 26px;
   cursor: pointer;
 }
 
-/* variantes scroll */
+/* variantes */
 #modal-precio {
-  max-height: 200px;
+  max-height: 180px;
   overflow-y: auto;
 }
 
 /* =========================
-   CARRITO
+   CARRITO (FIX REAL)
 ========================= */
 .carrito {
   position: fixed;
-  right: -400px;
   top: 0;
+  right: 0;
   width: 350px;
   height: 100%;
+
   background: white;
   padding: 20px;
+
   box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-  transition: right 0.3s;
-  z-index: 2000;
   overflow-y: auto;
+
+  transform: translateX(100%); /* 👈 clave */
+  transition: transform 0.3s;
+
+  z-index: 2000;
 }
 
 .carrito.open {
-  right: 0;
+  transform: translateX(0);
 }
 
 #btn-carrito-toggle {
   position: fixed;
   right: 20px;
-  bottom: 90px; /* desktop */
+  bottom: 90px;
   z-index: 2001;
-}
-
-/* 📱 MOBILE FIX */
-@media (max-width: 768px) {
-  #btn-carrito-toggle {
-    bottom: 80px;
-    right: 15px;
-  }
-
-  .whatsapp-float {
-    bottom: 15px;
-    right: 15px;
-  }
 }
 
 /* =========================
@@ -259,15 +232,15 @@ header {
 }
 
 /* =========================
-   WHATSAPP FLOAT
+   WHATSAPP FIX
 ========================= */
 .whatsapp-float {
   position: fixed;
   bottom: 20px;
   right: 20px;
 
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
 
   background: #25D366;
   border-radius: 50%;
@@ -277,6 +250,13 @@ header {
   justify-content: center;
 
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+
+  z-index: 2001;
+}
+
+.whatsapp-float svg {
+  width: 26px;
+  height: 26px;
 }
 
 /* =========================
@@ -315,9 +295,10 @@ body.dark .card {
 }
 
 /* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
 @media (max-width: 768px) {
+
   .grid {
     grid-template-columns: 1fr;
   }
@@ -330,11 +311,126 @@ body.dark .card {
     grid-template-columns: 1fr;
   }
 
+  .modal-content {
+    width: 95%;
+    padding: 12px;
+  }
+
   .modal-img-container {
     height: 200px;
   }
 
   #modal-precio {
-    max-height: 150px;
+    max-height: 140px;
   }
+
+  #btn-carrito-toggle {
+    bottom: 85px;
+    right: 15px;
+  }
+
+  .whatsapp-float {
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+/* =========================
+   MODAL PRO
+========================= */
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* GALERIA */
+.modal-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-main-img {
+  position: relative;
+  width: 100%;
+  height: 260px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-main-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* flechas */
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+
+  background: rgba(255,255,255,0.9);
+  border: none;
+  cursor: pointer;
+
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+#prev-img { left: 5px; }
+#next-img { right: 5px; }
+
+/* thumbnails */
+.modal-thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.modal-thumbs img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.6;
+
+  transition: 0.2s;
+}
+
+.modal-thumbs img.active {
+  opacity: 1;
+  border: 2px solid #6d4c41;
+}
+
+.modal-thumbs img:hover {
+  opacity: 1;
+}
+
+/* INFO */
+.modal-info {
+  text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .modal-main-img {
+    height: 200px;
+  }
+
+  .modal-thumbs img {
+    width: 50px;
+    height: 50px;
+  }
+
 }

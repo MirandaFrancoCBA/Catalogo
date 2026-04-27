@@ -156,18 +156,32 @@
     <!-- ===================== -->
     <div id="modal" class="modal hidden">
       <div class="modal-content">
+        <span class="modal-close">&times;</span>
+    
         <div class="modal-body">
-          <span class="modal-close">&times;</span>
-
-          <div class="modal-img-container">
-            <img id="modal-img" src="" alt="" />
-            <button id="prev-img" class="modal-nav">&lt;</button>
-            <button id="next-img" class="modal-nav">&gt;</button>
+    
+          <!-- GALERÍA -->
+          <div class="modal-gallery">
+            
+            <!-- Imagen principal -->
+            <div class="modal-main-img">
+              <button id="prev-img" class="modal-nav">‹</button>
+              <img id="modal-img" src="" alt="">
+              <button id="next-img" class="modal-nav">›</button>
+            </div>
+    
+            <!-- Thumbnails -->
+            <div id="modal-thumbs" class="modal-thumbs"></div>
+    
           </div>
-
-          <h3 id="modal-nombre"></h3>
-          <p id="modal-descripcion"></p>
-          <div id="modal-precio"></div>
+    
+          <!-- INFO -->
+          <div class="modal-info">
+            <h3 id="modal-nombre"></h3>
+            <p id="modal-descripcion"></p>
+            <div id="modal-precio"></div>
+          </div>
+    
         </div>
       </div>
     </div>
